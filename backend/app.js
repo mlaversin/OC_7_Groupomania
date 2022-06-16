@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 
 const app = express();
 
+const userRoutes = require('./routes/user');
+
 /*
  * Configure database connection
  */
@@ -36,8 +38,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use((req, res, next) => {
-  console.log('test');
-});
+app.use('/api/user', userRoutes);
 
 module.exports = app;
