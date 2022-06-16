@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const userCtrl = require('../controllers/user');
+const userCtrl = require('../controllers/user.controller');
 
 const password = require('../middlewares/password');
 const email = require('../middlewares/email');

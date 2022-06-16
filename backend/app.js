@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 const app = express();
 
-const userRoutes = require('./routes/user');
+const userRoutes = require('./routes/user.routes');
 
 /*
  * Configure database connection
