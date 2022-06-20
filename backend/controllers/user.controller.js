@@ -56,3 +56,7 @@ exports.login = (req, res, next) => {
     })
     .catch((error) => res.status(500).json({ error }));
 };
+
+/*
+ * This function is used to retrieve user informations
+ */
