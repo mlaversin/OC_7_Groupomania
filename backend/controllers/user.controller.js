@@ -1,62 +1,65 @@
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-
 const User = require('../models/User');
+// const ObjectId = require('mongoose').Types.ObjectId;
 
 /*
- * This function allows the user to sign up
+ * This function allows you to retrieve the information of all users
  */
-exports.signup = (req, res, next) => {
-  bcrypt
-    .hash(req.body.password, 10)
-    .then((hash) => {
-      const user = new User({
-        email: req.body.email,
-        password: hash,
+exports.getAllUsers = (req, res) => {
+  User.find()
+    .select('-password')
+    .then((users) => {
+      res.status(200).json(users);
+    })
+    .catch((error) => {
+      res.status(400).json({ error });
+    });
+};
+
+/*
+ * This function allows you to retrieve the information of a single user
+ */
+exports.getOneUser = (req, res) => {
+  User.findOne({
+    _id: req.params.id,
+  })
+    .select('-password')
+    .then((user) => {
+      res.status(200).json(user);
+    })
+    .catch((error) => {
+      res.statusMessage = "Cet utilisateur n'existe pas.";
+      res.status(404).send();
+    });
+};
+
+/*
+ * This function allows you to update the information of a single user
+ */
+exports.updateUser = (req, res) => {
+  User.updateOne(
+    { _id: req.params.id },
+    {
+      $set: {
         firstname: req.body.firstname,
         lastname: req.body.lastname,
-      });
-      user
-        .save()
-        .then(() =>
-          res
-            .status(201)
-            .json({ message: 'Le nouveau compte a bien été créé.' })
-        )
-        .catch((error) => res.status(400).json({ error }));
-    })
-    .catch((error) => res.status(500).json({ error }));
+      },
+    }
+  )
+    .then(() =>
+      res
+        .status(200)
+        .json({ message: 'Vos informations ont bien été mises à jour.' })
+    )
+    .catch((error) => res.status(400).json({ error }));
 };
 
 /*
- * This function allows the user to login
+ * This function is used to delete a user from the database
  */
-exports.login = (req, res, next) => {
-  User.findOne({ email: req.body.email })
-    .then((user) => {
-      if (!user) {
-        res.statusMessage = 'Email ou mot de passe invalide.';
-        return res.status(401).send();
-      }
-      bcrypt
-        .compare(req.body.password, user.password)
-        .then((valid) => {
-          if (!valid) {
-            res.statusMessage = 'Email ou mot de passe invalide.';
-            return res.status(401).send();
-          }
-          res.status(200).json({
-            userId: user._id,
-            token: jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-              expiresIn: '24h',
-            }),
-          });
-        })
-        .catch((error) => res.status(500).json({ error }));
-    })
-    .catch((error) => res.status(500).json({ error }));
+exports.deleteUser = (req, res, next) => {
+  User.deleteOne({ _id: req.params.id })
+    .then(() =>
+      res.status(200).json({ message: 'Votre compte a bien été supprimé.' })
+    )
+    .catch((error) => res.status(400).json({ error }));
 };
-
-/*
- * This function is used to retrieve user informations
- */
