@@ -9,7 +9,7 @@ const userCtrl = require('../controllers/user.controller');
 
 router.post('/signup', email, password, authCtrl.signup);
 router.post('/login', authCtrl.login);
-router.get('/logout', authCtrl.login);
+router.get('/logout', authCtrl.logout);
 
 router.get('/', userCtrl.getAllUsers);
 router.get('/:id', userCtrl.getOneUser);

@@ -4,6 +4,12 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 // const ObjectId = require('mongoose').Types.ObjectId;
 
+const maxAge = 3 * 24 * 60 * 60 * 1000;
+
+const createToken = (id) => {
+  return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: maxAge });
+};
+
 /*
  * This function allows the user to sign up
  */
@@ -46,12 +52,9 @@ exports.login = (req, res) => {
             res.statusMessage = 'Mot de passe invalide.';
             return res.status(401).send();
           }
-          res.status(200).json({
-            userId: user._id,
-            token: jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-              expiresIn: '24h',
-            }),
-          });
+          const token = createToken(user._id);
+          res.cookie('jwt', token, { httpOnly: true, maxAge });
+          res.status(200).json({ userId: user._id });
         })
         .catch((error) => res.status(500).json({ error }));
     })
@@ -61,4 +64,7 @@ exports.login = (req, res) => {
 /*
  * This function allows the user to logout
  */
-exports.logout = (req, res, next) => {};
+exports.logout = (req, res, next) => {
+  res.cookie('jwt', '', { maxAge: 1 });
+  res.redirect('/');
+};
