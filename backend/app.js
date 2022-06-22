@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
+const cookieParser = require('cookie-parser');
 
 const app = express();
 
@@ -22,6 +23,11 @@ mongoose
  * Parses incoming JSON requests and puts the parsed data in req.body
  */
 app.use(express.json());
+
+/*
+ * Parses Cookie header and populate req.cookies with an object keyed by the cookie names.
+ */
+app.use(cookieParser());
 
 /*
  * Allows cross-origin requests
