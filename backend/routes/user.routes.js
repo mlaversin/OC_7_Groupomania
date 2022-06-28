@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-const auth = require('../middlewares/auth');
-const password = require('../middlewares/password');
 const email = require('../middlewares/email');
+const password = require('../middlewares/password');
+const auth = require('../middlewares/auth');
 
 const authCtrl = require('../controllers/auth.controller');
 const userCtrl = require('../controllers/user.controller');
@@ -11,9 +11,9 @@ const userCtrl = require('../controllers/user.controller');
 router.post('/signup', email, password, authCtrl.signup);
 router.post('/login', authCtrl.login);
 
-router.get('/', userCtrl.getAllUsers);
-router.get('/:id', userCtrl.getOneUser);
-router.put('/:id', userCtrl.updateUser);
-router.delete('/:id', userCtrl.deleteUser);
+router.get('/', auth, userCtrl.getAllUsers);
+router.get('/:id', auth, userCtrl.getOneUser);
+router.put('/:id', auth, userCtrl.updateUser);
+router.delete('/:id', auth, userCtrl.deleteUser);
 
 module.exports = router;
