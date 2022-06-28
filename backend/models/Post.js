@@ -4,9 +4,7 @@ const postSchema = mongoose.Schema(
   {
     userId: { type: String, required: true },
     message: { type: String, required: true },
-    pictureUrl: { type: String, required: true },
-    createdAt: { type: String, required: true },
-    updatedAt: { type: String, required: true },
+    pictureUrl: { type: String },
     likes: { type: Number, required: true, default: 0 },
     usersLiked: { type: [String], required: true, default: [] },
   },
