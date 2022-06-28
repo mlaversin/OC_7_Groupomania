@@ -54,8 +54,3 @@ exports.login = (req, res) => {
     })
     .catch((error) => res.status(500).json({ error }));
 };
-
-/*
- * This function allows the user to logout
- */
-exports.logout = (req, res, next) => {};
