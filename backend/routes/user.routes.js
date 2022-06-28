@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
+const auth = require('../middlewares/auth');
 const password = require('../middlewares/password');
 const email = require('../middlewares/email');
 
