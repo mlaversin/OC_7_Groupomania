@@ -3,7 +3,7 @@ const User = require('../models/User');
 /*
  * This function allows you to retrieve the information of all users
  */
-exports.getAllUsers = async (req, res) => {
+exports.getAllUsers = (req, res) => {
   User.find()
     .select('-password')
     .then((users) => {
@@ -23,7 +23,7 @@ exports.getAllUsers = async (req, res) => {
 /*
  * This function allows you to retrieve the information of a single user
  */
-exports.getOneUser = async (req, res) => {
+exports.getOneUser = (req, res) => {
   User.findOne({
     _id: req.params.id,
   })
@@ -45,7 +45,7 @@ exports.getOneUser = async (req, res) => {
 /*
  * This function allows you to update the information of a single user
  */
-exports.updateUser = async (req, res) => {
+exports.updateUser = (req, res) => {
   if (req.auth.userRole === 'admin' || req.auth.userId === req.params.id) {
     User.updateOne(
       { _id: req.params.id },
@@ -72,7 +72,7 @@ exports.updateUser = async (req, res) => {
 /*
  * This function is used to delete a user from the database
  */
-exports.deleteUser = async (req, res) => {
+exports.deleteUser = (req, res) => {
   if (req.auth.userRole === 'admin' || req.auth.userId === req.params.id) {
     User.deleteOne({ _id: req.params.id })
       .then(() =>

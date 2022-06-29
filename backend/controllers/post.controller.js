@@ -3,7 +3,7 @@ const Post = require('../models/Post');
 /*
  * This function is used to create a post
  */
-exports.createPost = async (req, res, next) => {
+exports.createPost = (req, res) => {
   const post = new Post({ ...req.body.post, userId: req.auth.userId });
   post
     .save()
@@ -18,7 +18,7 @@ exports.createPost = async (req, res, next) => {
 /*
  * This function is used to retrieve all the posts
  */
-exports.getAllPosts = (req, res, next) => {
+exports.getAllPosts = (req, res) => {
   Post.find()
     .then((posts) => {
       res.status(200).json(posts);
@@ -31,7 +31,7 @@ exports.getAllPosts = (req, res, next) => {
 /*
  * This function is used to retrieve a single post
  */
-exports.getOnePost = (req, res, next) => {
+exports.getOnePost = (req, res) => {
   Post.findOne({
     _id: req.params.id,
   })
@@ -46,7 +46,7 @@ exports.getOnePost = (req, res, next) => {
 /*
  * This function is used to update a post
  */
-exports.editPost = async (req, res, next) => {
+exports.editPost = async (req, res) => {
   const postUserId = await Post.findOne({ _id: req.params.id })
     .then((post) => post.userId)
     .catch((error) => res.status(400).json({ error }));
@@ -72,7 +72,7 @@ exports.editPost = async (req, res, next) => {
 /*
  * This function is used to delete a post
  */
-exports.deletePost = async (req, res, next) => {
+exports.deletePost = (req, res) => {
   Post.findOne({ _id: req.params.id })
     .then((post) => {
       if (req.auth.userRole === 'admin' || req.auth.userId === post.userId) {
