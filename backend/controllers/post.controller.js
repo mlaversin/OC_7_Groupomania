@@ -1,5 +1,4 @@
 const Post = require('../models/Post');
-const { postUser } = require('../services/post.services');
 
 /*
  * This function is used to create a post
@@ -48,7 +47,9 @@ exports.getOnePost = (req, res, next) => {
  * This function is used to update a post
  */
 exports.editPost = async (req, res, next) => {
-  const postUserId = await postUser(req.params.id);
+  const postUserId = await Post.findOne({ _id: req.params.id })
+    .then((post) => post.userId)
+    .catch((error) => res.status(400).json({ error }));
 
   if (req.auth.userRole === 'admin' || req.auth.userId === postUserId) {
     Post.updateOne(
