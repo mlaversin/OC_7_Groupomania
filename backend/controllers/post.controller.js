@@ -1,13 +1,11 @@
 const Post = require('../models/Post');
-const { authUser } = require('../services/auth.services');
 const { postUser } = require('../services/post.services');
 
 /*
  * This function is used to create a post
  */
 exports.createPost = async (req, res, next) => {
-  const authenticatedUser = await authUser(req.auth.userId);
-  const post = new Post({ ...req.body.post, userId: authenticatedUser.id });
+  const post = new Post({ ...req.body.post, userId: req.auth.userId });
   post
     .save()
     .then(() =>
@@ -50,13 +48,9 @@ exports.getOnePost = (req, res, next) => {
  * This function is used to update a post
  */
 exports.editPost = async (req, res, next) => {
-  const authenticatedUser = await authUser(req.auth.userId);
   const postUserId = await postUser(req.params.id);
 
-  if (
-    authenticatedUser.role === 'admin' ||
-    authenticatedUser.id === postUserId
-  ) {
+  if (req.auth.userRole === 'admin' || req.auth.userId === postUserId) {
     Post.updateOne(
       { _id: req.params.id },
       {
@@ -78,14 +72,9 @@ exports.editPost = async (req, res, next) => {
  * This function is used to delete a post
  */
 exports.deletePost = async (req, res, next) => {
-  const authenticatedUser = await authUser(req.auth.userId);
-
   Post.findOne({ _id: req.params.id })
     .then((post) => {
-      if (
-        authenticatedUser.role === 'admin' ||
-        authenticatedUser.id === post.userId
-      ) {
+      if (req.auth.userRole === 'admin' || req.auth.userId === post.userId) {
         Post.deleteOne({ _id: req.params.id })
           .then(() =>
             res.status(200).json({ message: 'Votre message a été supprimé.' })

@@ -1,16 +1,13 @@
 const User = require('../models/User');
-const { authUser } = require('../services/auth.services');
 
 /*
  * This function allows you to retrieve the information of all users
  */
 exports.getAllUsers = async (req, res) => {
-  const authenticatedUser = await authUser(req.auth.userId);
-
   User.find()
     .select('-password')
     .then((users) => {
-      if (authenticatedUser.role === 'admin') {
+      if (req.auth.userRole === 'admin') {
         res.status(200).json(users);
       } else {
         res.status(403).json({
@@ -27,17 +24,12 @@ exports.getAllUsers = async (req, res) => {
  * This function allows you to retrieve the information of a single user
  */
 exports.getOneUser = async (req, res) => {
-  const authenticatedUser = await authUser(req.auth.userId);
-
   User.findOne({
     _id: req.params.id,
   })
     .select('-password')
     .then((user) => {
-      if (
-        authenticatedUser.role === 'admin' ||
-        authenticatedUser.email === user.email
-      ) {
+      if (req.auth.userRole === 'admin' || req.auth.userId === req.params.id) {
         res.status(200).json(user);
       } else {
         res.status(403).json({
@@ -54,9 +46,7 @@ exports.getOneUser = async (req, res) => {
  * This function allows you to update the information of a single user
  */
 exports.updateUser = async (req, res) => {
-  const authenticatedUser = await authUser(req.auth.userId);
-
-  if (authenticatedUser === 'admin' || authenticatedUser.id === req.params.id) {
+  if (req.auth.userRole === 'admin' || req.auth.userId === req.params.id) {
     User.updateOne(
       { _id: req.params.id },
       {
@@ -82,10 +72,8 @@ exports.updateUser = async (req, res) => {
 /*
  * This function is used to delete a user from the database
  */
-exports.deleteUser = async (req, res, next) => {
-  const authenticatedUser = await authUser(req.auth.userId);
-
-  if (authenticatedUser === 'admin' || authenticatedUser.id === req.params.id) {
+exports.deleteUser = async (req, res) => {
+  if (req.auth.userRole === 'admin' || req.auth.userId === req.params.id) {
     User.deleteOne({ _id: req.params.id })
       .then(() =>
         res.status(200).json({ message: 'Votre compte a bien été supprimé.' })
