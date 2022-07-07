@@ -6,6 +6,16 @@ body {
   width: 100%;
 }
 
+.app-container {
+  height: 100vh;
+  position: relative;
+}
+
 img {
   width: 100%;
+}
+
+h1 {
+  text-align: center;
+  padding: 2rem;
 }
