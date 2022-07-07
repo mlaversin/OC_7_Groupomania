@@ -29,7 +29,9 @@ export default function LoginForm() {
       .then((res) => res.json())
       .then((userInfo) => {
         localStorage.setItem('token', JSON.stringify(userInfo.token));
-        navigate('/');
+        console.log('login');
+        console.log(userInfo.token);
+        // navigate('/');
       })
       .catch((err) => console.log(err));
   };
