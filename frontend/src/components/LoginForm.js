@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
@@ -18,6 +18,8 @@ export default function LoginForm() {
     password: '',
   };
 
+  const [errorMessage, setErrorMessage] = useState('');
+
   const handleSubmit = (values) => {
     fetch('http://localhost:3000/api/user/login', {
       method: 'POST',
@@ -27,13 +29,20 @@ export default function LoginForm() {
       body: JSON.stringify(values),
     })
       .then((res) => res.json())
-      .then((userInfo) => {
-        localStorage.setItem('token', JSON.stringify(userInfo.token));
-        console.log('login');
-        console.log(userInfo.token);
-        // navigate('/');
+      .then((res) => {
+        if (res.token) {
+          localStorage.setItem('token', JSON.stringify(res.token));
+          navigate('/');
+        } else {
+          navigate('/auth');
+          setErrorMessage(res.message);
+          console.log(res.message);
+        }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        navigate('/auth');
+      });
   };
 
   return (
@@ -61,6 +70,9 @@ export default function LoginForm() {
           </div>
           <div>
             <button type='submit'>Connexion</button>
+          </div>
+          <div className='error-message'>
+            {errorMessage ? errorMessage : ''}
           </div>
         </Form>
       </Formik>
