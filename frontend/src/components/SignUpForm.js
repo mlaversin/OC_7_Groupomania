@@ -39,8 +39,8 @@ export default function SignUpForm() {
   };
 
   return (
-    <div>
-      <h2>Formulaire d'inscription</h2>
+    <div className='form signup-form'>
+      <h2 className='form-title'>Formulaire d'inscription</h2>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}

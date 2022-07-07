@@ -35,8 +35,8 @@ export default function LoginForm() {
   };
 
   return (
-    <div>
-      <h2>Formulaire de connexion</h2>
+    <div className='form login-form'>
+      <h2 className='form-title'>Formulaire de connexion</h2>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}

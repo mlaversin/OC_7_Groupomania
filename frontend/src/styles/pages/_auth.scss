@@ -1,0 +1,23 @@
+.authentication-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-form,
+.signupform {
+  margin: 3rem;
+}
+
+.form-title {
+  padding-bottom: 1.5rem;
+}
+
+input {
+  margin-bottom: 0.6rem;
+}
+
+label {
+  display: block;
+}
