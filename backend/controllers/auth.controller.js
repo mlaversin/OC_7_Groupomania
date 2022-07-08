@@ -9,7 +9,7 @@ const User = require('../models/User');
 exports.signup = (req, res) => {
   bcrypt
     .hash(req.body.password, 10)
-    .then((hash) => {
+    .then(hash => {
       const user = new User({
         email: req.body.email,
         password: hash,
@@ -23,9 +23,9 @@ exports.signup = (req, res) => {
             .status(201)
             .json({ message: 'Le nouveau compte a bien été créé.' })
         )
-        .catch((error) => res.status(400).json({ error }));
+        .catch(error => res.status(400).json({ error }));
     })
-    .catch((error) => res.status(500).json({ error }));
+    .catch(error => res.status(500).json({ error }));
 };
 
 /*
@@ -33,13 +33,14 @@ exports.signup = (req, res) => {
  */
 exports.login = (req, res) => {
   User.findOne({ email: req.body.email })
-    .then((user) => {
+    .then(user => {
       if (!user) {
-        return res.status(401).json({ message: "Ce compte n'existe pas." });
+        // return res.status(401).json({ message: "Ce compte n'existe pas." });
+        return res.status(401).json({ error: 'Compte inexistant' });
       }
       bcrypt
         .compare(req.body.password, user.password)
-        .then((valid) => {
+        .then(valid => {
           if (!valid) {
             return res.status(401).json({ message: 'Mot de passe invalide.' });
           }
@@ -54,7 +55,7 @@ exports.login = (req, res) => {
             ),
           });
         })
-        .catch((error) => res.status(500).json({ error }));
+        .catch(error => res.status(500).json({ error }));
     })
-    .catch((error) => res.status(500).json({ error }));
+    .catch(error => res.status(500).json({ error }));
 };

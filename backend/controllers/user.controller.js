@@ -6,7 +6,7 @@ const User = require('../models/User');
 exports.getAllUsers = (req, res) => {
   User.find()
     .select('-password')
-    .then((users) => {
+    .then(users => {
       if (req.auth.userRole === 'admin') {
         res.status(200).json(users);
       } else {
@@ -15,7 +15,7 @@ exports.getAllUsers = (req, res) => {
         });
       }
     })
-    .catch((error) => {
+    .catch(error => {
       res.status(400).json({ error });
     });
 };
@@ -28,7 +28,7 @@ exports.getOneUser = (req, res) => {
     _id: req.params.id,
   })
     .select('-password')
-    .then((user) => {
+    .then(user => {
       if (req.auth.userRole === 'admin' || req.auth.userId === req.params.id) {
         res.status(200).json(user);
       } else {
@@ -37,7 +37,7 @@ exports.getOneUser = (req, res) => {
         });
       }
     })
-    .catch((error) => {
+    .catch(error => {
       res.status(404).json({ message: "Cet utilisateur n'existe pas." });
     });
 };
@@ -61,7 +61,7 @@ exports.updateUser = (req, res) => {
           .status(200)
           .json({ message: 'Vos informations ont bien été mises à jour.' })
       )
-      .catch((error) => res.status(400).json({ error }));
+      .catch(error => res.status(400).json({ error }));
   } else {
     res.status(403).json({
       message: "Vous n'êtes pas autorisé à effectuer cette requête.",
@@ -78,7 +78,7 @@ exports.deleteUser = (req, res) => {
       .then(() =>
         res.status(200).json({ message: 'Votre compte a bien été supprimé.' })
       )
-      .catch((error) => res.status(400).json({ error }));
+      .catch(error => res.status(400).json({ error }));
   } else {
     res.status(403).json({
       message: "Vous n'êtes pas autorisé à effectuer cette requête.",

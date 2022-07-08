@@ -10,7 +10,7 @@ exports.createPost = (req, res) => {
     .then(() =>
       res.status(201).json({ message: 'Votre message a bien été envoyé.' })
     )
-    .catch((error) => {
+    .catch(error => {
       res.status(400).json({ error });
     });
 };
@@ -20,10 +20,10 @@ exports.createPost = (req, res) => {
  */
 exports.getAllPosts = (req, res) => {
   Post.find()
-    .then((posts) => {
+    .then(posts => {
       res.status(200).json(posts);
     })
-    .catch((error) => {
+    .catch(error => {
       res.status(400).json({ error });
     });
 };
@@ -35,10 +35,10 @@ exports.getOnePost = (req, res) => {
   Post.findOne({
     _id: req.params.id,
   })
-    .then((post) => {
+    .then(post => {
       res.status(200).json(post);
     })
-    .catch((error) => {
+    .catch(error => {
       res.status(404).json({ error });
     });
 };
@@ -48,8 +48,8 @@ exports.getOnePost = (req, res) => {
  */
 exports.editPost = async (req, res) => {
   const postUserId = await Post.findOne({ _id: req.params.id })
-    .then((post) => post.userId)
-    .catch((error) => res.status(400).json({ error }));
+    .then(post => post.userId)
+    .catch(error => res.status(400).json({ error }));
 
   if (req.auth.userRole === 'admin' || req.auth.userId === postUserId) {
     Post.updateOne(
@@ -61,7 +61,7 @@ exports.editPost = async (req, res) => {
       .then(() =>
         res.status(200).json({ message: 'Le message a été modifié.' })
       )
-      .catch((error) => res.status(400).json({ error }));
+      .catch(error => res.status(400).json({ error }));
   } else {
     res.status(403).json({
       message: "Vous n'êtes pas autorisé à effectuer cette requête.",
@@ -74,20 +74,20 @@ exports.editPost = async (req, res) => {
  */
 exports.deletePost = (req, res) => {
   Post.findOne({ _id: req.params.id })
-    .then((post) => {
+    .then(post => {
       if (req.auth.userRole === 'admin' || req.auth.userId === post.userId) {
         Post.deleteOne({ _id: req.params.id })
           .then(() =>
             res.status(200).json({ message: 'Votre message a été supprimé.' })
           )
-          .catch((error) => res.status(400).json({ error }));
+          .catch(error => res.status(400).json({ error }));
       } else {
         res.status(403).json({
           message: "Vous n'êtes pas autorisé à effectuer cette requête.",
         });
       }
     })
-    .catch((error) => res.status(500).json({ error }));
+    .catch(error => res.status(500).json({ error }));
 };
 
 /*
