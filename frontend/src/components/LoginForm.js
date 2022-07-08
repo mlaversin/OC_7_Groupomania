@@ -20,7 +20,7 @@ export default function LoginForm() {
 
   const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSubmit = (values) => {
+  const handleSubmit = values => {
     fetch('http://localhost:3000/api/user/login', {
       method: 'POST',
       headers: {
@@ -28,20 +28,17 @@ export default function LoginForm() {
       },
       body: JSON.stringify(values),
     })
-      .then((res) => res.json())
-      .then((res) => {
+      .then(res => res.json())
+      .then(res => {
         if (res.token) {
           localStorage.setItem('token', JSON.stringify(res.token));
           navigate('/');
         } else {
-          navigate('/auth');
-          setErrorMessage(res.message);
-          console.log(res.message);
+          setErrorMessage(res.error);
         }
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
-        navigate('/auth');
       });
   };
 
@@ -51,7 +48,7 @@ export default function LoginForm() {
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={(values) => handleSubmit(values)}
+        onSubmit={values => handleSubmit(values)}
       >
         <Form>
           <div>
