@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import Layout from '../components/Layout';
 import PostCard from '../components/PostCard';
 
 export default function Home() {
@@ -23,16 +22,14 @@ export default function Home() {
 
   return (
     <>
-      <Layout>
-        <main className='homepage'>
-          <h1>Page d'accueil</h1>
-          <div className='posts-container'>
-            {posts.map((post, index) => (
-              <PostCard key={post._id} post={post} />
-            ))}
-          </div>
-        </main>
-      </Layout>
+      <main className='homepage'>
+        <h1>Page d'accueil</h1>
+        <div className='posts-container'>
+          {posts.map((post, index) => (
+            <PostCard key={post._id} post={post} />
+          ))}
+        </div>
+      </main>
     </>
   );
 }
