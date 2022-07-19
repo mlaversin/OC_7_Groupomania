@@ -29,13 +29,7 @@ exports.getOneUser = (req, res) => {
   })
     .select('-password')
     .then(user => {
-      if (req.auth.userRole === 'admin' || req.auth.userId === req.params.id) {
-        res.status(200).json(user);
-      } else {
-        res.status(403).json({
-          message: "Vous n'êtes pas autorisé à effectuer cette requête.",
-        });
-      }
+      res.status(200).json(user);
     })
     .catch(error => {
       res.status(404).json({ message: "Cet utilisateur n'existe pas." });

@@ -13,10 +13,9 @@ export default function Home() {
         Authorization: `Bearer ${token}`,
       },
     })
-      .then((res) => res.json())
-      .then((data) => {
+      .then(res => res.json())
+      .then(data => {
         setPosts(data);
-        console.log(data);
       });
   }, []);
 

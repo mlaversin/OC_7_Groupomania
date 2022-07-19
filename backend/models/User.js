@@ -7,6 +7,7 @@ const userSchema = mongoose.Schema({
   firstname: { type: String, required: true },
   lastname: { type: String, required: true },
   role: { type: String, required: true, default: 'user' },
+  posts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Post' }],
 });
 
 userSchema.plugin(uniqueValidator);

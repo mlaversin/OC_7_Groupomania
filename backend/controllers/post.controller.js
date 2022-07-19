@@ -4,7 +4,7 @@ const Post = require('../models/Post');
  * This function is used to create a post
  */
 exports.createPost = (req, res) => {
-  const post = new Post({ ...req.body.post, userId: req.auth.userId });
+  const post = new Post({ ...req.body.post, user: req.auth.userId });
   post
     .save()
     .then(() =>
