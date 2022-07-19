@@ -20,7 +20,7 @@ export default function PostCard({ post }) {
 
   return (
     <article className='post-card'>
-      <p className='post-card__user'>{user}</p>
+      <p className='post-card__username'>{user}</p>
       <p className='post-card__createdAt'>Posté le {createdAt} </p>
       <p className='post-card__message'>{post.message}</p>
     </article>

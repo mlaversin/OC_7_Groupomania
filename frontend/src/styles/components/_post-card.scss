@@ -1,9 +1,13 @@
 .post-card {
-  padding: 2rem;
-  margin-bottom: 0.5rem;
+  padding: 1.75rem;
+  margin-bottom: 0.75rem;
   max-width: 60vw;
   border: 1px solid #eee;
   border-radius: 1rem;
+
+  &__username {
+    font-weight: bold;
+  }
 
   &__createdAt {
     margin: 1rem 0;
