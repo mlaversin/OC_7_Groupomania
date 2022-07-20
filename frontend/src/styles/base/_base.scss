@@ -7,8 +7,11 @@ body {
 }
 
 .app-container {
-  height: 100vh;
-  position: relative;
+  min-height: 100vh;
+}
+
+main {
+  padding-top: 3.5rem;
 }
 
 img {
