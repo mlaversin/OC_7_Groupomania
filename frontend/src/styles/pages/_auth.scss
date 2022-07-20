@@ -5,8 +5,37 @@
   align-items: center;
 }
 
+.auth-container {
+  width: 50%;
+  max-width: 30rem;
+  
+
+  &__header {
+
+    ul {
+      display: flex;
+    }
+
+    li {
+      width: 50%;
+      padding: 1rem;
+      text-align: center;
+      cursor: pointer;
+      border: 1px solid #ccc;
+    }
+  }
+
+  &__body {
+    display: flex;
+    justify-content: center;
+    border: 1px solid #ccc;
+  }
+}
+
+
+
 .login-form,
-.signupform {
+.signup-form {
   margin: 3rem;
 }
 

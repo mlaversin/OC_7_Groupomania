@@ -22,7 +22,7 @@ export default function SignUpForm() {
     password: '',
   };
 
-  const handleSubmit = (values) => {
+  const handleSubmit = values => {
     fetch('http://localhost:3000/api/user/signup', {
       method: 'POST',
       headers: {
@@ -30,21 +30,20 @@ export default function SignUpForm() {
       },
       body: JSON.stringify(values),
     })
-      .then((res) => res.json())
-      .then((res) => {
+      .then(res => res.json())
+      .then(res => {
         console.log(res.message);
         navigate('/');
       })
-      .catch((err) => console.log(err));
+      .catch(err => console.log(err));
   };
 
   return (
     <div className='form signup-form'>
-      <h2 className='form-title'>Formulaire d'inscription</h2>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={(values) => handleSubmit(values)}
+        onSubmit={values => handleSubmit(values)}
       >
         <Form>
           <div>
