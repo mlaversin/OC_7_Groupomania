@@ -21,6 +21,7 @@ exports.createPost = (req, res) => {
  */
 exports.getAllPosts = (req, res) => {
   Post.find()
+    .sort({ createdAt: 'desc' })
     .populate('user', 'firstname + lastname -_id')
     .then(posts => {
       res.status(200).json(posts);
