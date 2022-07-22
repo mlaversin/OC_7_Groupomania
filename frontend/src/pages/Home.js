@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import PostForm from '../components/PostForm';
 import PostCard from '../components/PostCard';
 
 export default function Home() {
@@ -17,12 +18,13 @@ export default function Home() {
       .then(data => {
         setPosts(data);
       });
-  }, []);
+  }, [posts]);
 
   return (
     <>
       <main className='homepage'>
         <h1>Page d'accueil</h1>
+        <PostForm />
         <div className='posts-container'>
           {posts.map((post, index) => (
             <PostCard key={post._id} post={post} />

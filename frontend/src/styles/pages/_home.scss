@@ -3,3 +3,27 @@
   flex-direction: column;
   align-items: center;
 }
+
+.post-form {
+  width: 60vw;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  background-color: rgb(241, 241, 241);
+  border-radius: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.post-form input {
+  width: 55vw;
+  height: 4rem;
+  margin-top: 0.6rem;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.post-form button {
+  float: right;
+}

@@ -5,13 +5,14 @@ const User = require('../models/User');
  * This function is used to create a post
  */
 exports.createPost = (req, res) => {
-  const post = new Post({ ...req.body.post, user: req.auth.userId });
+  const post = new Post({ ...req.body, user: req.auth.userId });
   post
     .save()
     .then(() =>
       res.status(201).json({ message: 'Votre message a bien été envoyé.' })
     )
     .catch(error => {
+      console.log('on est dans le catch de createPost');
       res.status(400).json({ error });
     });
 };
