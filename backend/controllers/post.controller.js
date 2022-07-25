@@ -100,6 +100,35 @@ exports.deletePost = (req, res) => {
 /*
  * This function is used to add a like
  */
-exports.likePost = (req, res, next) => {
-  console.log('post liked !');
+exports.likePost = (req, res) => {
+  const like = req.body.like;
+  Post.findOne({ _id: req.params.id })
+    .then(post => {
+      const noRating = !post.usersLiked.includes(req.auth.userId);
+
+      if (noRating && like === 1) {
+        Post.updateOne(
+          { _id: req.params.id },
+          {
+            $push: { usersLiked: req.auth.userId },
+            $inc: { likes: +1 },
+          }
+        )
+          .then(() => res.status(200).json({ message: 'like ajouté !' }))
+          .catch(error => res.status(400).json({ error }));
+      } else if (like === 0) {
+        Post.updateOne(
+          { _id: req.params.id },
+          {
+            $pull: { usersLiked: req.auth.userId },
+            $inc: { likes: -1 },
+          }
+        )
+          .then(() => res.status(200).json({ message: 'like annulé !' }))
+          .catch(error => res.status(400).json({ error }));
+      } else {
+        res.status(400).json({ message: 'Problème avec la requête.' });
+      }
+    })
+    .catch(error => res.status(400).json({ error }));
 };
