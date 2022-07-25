@@ -25,5 +25,24 @@
 
   &__footer {
     padding: 1.5rem 0;
+    display: flex;
+    justify-content: space-between;
+
+    .like-icon {
+      width: 1rem;
+      cursor: pointer;
+    }
+
+    .like-counter {
+      padding-left: 1rem;
+    }
   }
+}
+
+.post-card__rating {
+  display: flex;
+}
+
+.like-btn-active {
+  color: #FD2D01;
 }

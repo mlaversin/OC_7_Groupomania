@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import Moment from 'moment';
+import LikeButton from './LikeButton';
 
 export default function PostCard({ post, userId }) {
   const createdAt = Moment(post.createdAt).format('DD/MM/YY à hh:mm');
-  const updatedAt = Moment(post.updatedAt).format('DD/MM/YY à hh:mm');
 
   const isAuthenticated = userId === post.user._id ? true : false;
 
@@ -46,8 +46,7 @@ export default function PostCard({ post, userId }) {
           {post.user.firstname + ' ' + post.user.lastname}
         </p>
         <p className='post-card__createdAt'>
-          Posté le {createdAt}{' '}
-          {post.createdAt !== post.updatedAt ? `- Modifié le ${updatedAt}` : ''}
+          Posté le {createdAt}
         </p>
       </div>
       <div className='post-card__body'>
@@ -66,10 +65,15 @@ export default function PostCard({ post, userId }) {
         )}
       </div>
       <div className='post-card__footer'>
+        <LikeButton post={post} userId={userId} />
         {isAuthenticated && (
-          <button onClick={() => setIsEditing(true)}>Editer</button>
+          <div className='buttons'>
+            <button onClick={() => setIsEditing(true)}>Editer</button>
+            <button className='delete-btn' onClick={handleDelete}>
+              Supprimer
+            </button>
+          </div>
         )}
-        {isAuthenticated && <button onClick={handleDelete}>Supprimer</button>}
       </div>
     </article>
   );

@@ -66,7 +66,7 @@ export default function PostForm() {
             </div>
           </div>
           <div>
-            <button type='submit'>Publier</button>
+            <button className='post-btn' type='submit'>Publier</button>
           </div>
           <div className='error-message'>
             {errorMessage ? errorMessage : ''}
