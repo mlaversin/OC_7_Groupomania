@@ -12,7 +12,6 @@ exports.createPost = (req, res) => {
       res.status(201).json({ message: 'Votre message a bien été envoyé.' })
     )
     .catch(error => {
-      console.log('on est dans le catch de createPost');
       res.status(400).json({ error });
     });
 };
@@ -51,29 +50,27 @@ exports.getOnePost = (req, res) => {
  * This function is used to update a post
  */
 exports.editPost = async (req, res) => {
-  const postUserId = await Post.findOne({ _id: req.params.id })
-    .then(post => post.userId)
-    .catch(error => res.status(400).json({ error }));
-
-  if (
-    req.auth.userRole === 'admin' ||
-    req.auth.userId === post.user.toString()
-  ) {
-    Post.updateOne(
-      { _id: req.params.id },
-      {
-        $set: { message: req.body.post.message },
+  Post.findOne({ _id: req.params.id })
+    .then(post => {
+      if (
+        req.auth.userRole === 'admin' ||
+        req.auth.userId === post.user.toString()
+      ) {
+        Post.updateOne(
+          { _id: req.params.id },
+          { $set: { message: req.body.message } }
+        )
+          .then(() =>
+            res.status(200).json({ message: 'Votre message a été modifié.' })
+          )
+          .catch(error => res.status(400).json({ error }));
+      } else {
+        res.status(403).json({
+          message: "Vous n'êtes pas autorisé à effectuer cette requête.",
+        });
       }
-    )
-      .then(() =>
-        res.status(200).json({ message: 'Le message a été modifié.' })
-      )
-      .catch(error => res.status(400).json({ error }));
-  } else {
-    res.status(403).json({
-      message: "Vous n'êtes pas autorisé à effectuer cette requête.",
-    });
-  }
+    })
+    .catch(error => res.status(500).json({ error }));
 };
 
 /*

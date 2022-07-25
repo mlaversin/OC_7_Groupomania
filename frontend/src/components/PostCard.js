@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Moment from 'moment';
 
 export default function PostCard({ post, userId }) {
@@ -5,11 +6,28 @@ export default function PostCard({ post, userId }) {
   const updatedAt = Moment(post.updatedAt).format('DD/MM/YY à hh:mm');
 
   const isAuthenticated = userId === post.user._id ? true : false;
-  const handleEdit = () => {};
+
+  const [isEditing, setIsEditing] = useState(false);
+  const [editPost, setEditPost] = useState(null);
+
+  const handleEdit = id => {
+    const token = JSON.parse(localStorage.getItem('token'));
+    const post = { message: editPost };
+    fetch(`http://localhost:3000/api/post/${id}`, {
+      method: 'put',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(post),
+    })
+      .then(res => res.json())
+      .then(res => console.log(res));
+    setIsEditing(false);
+  };
 
   const handleDelete = () => {
     const token = JSON.parse(localStorage.getItem('token'));
-
     fetch(`http://localhost:3000/api/post/${post._id}`, {
       method: 'delete',
       headers: {
@@ -29,14 +47,28 @@ export default function PostCard({ post, userId }) {
         </p>
         <p className='post-card__createdAt'>
           Posté le {createdAt}{' '}
-          {createdAt !== updatedAt ? `- Modifié le ${updatedAt}` : ''}
+          {post.createdAt !== post.updatedAt ? `- Modifié le ${updatedAt}` : ''}
         </p>
       </div>
       <div className='post-card__body'>
-        <p className='post-card__message'>{post.message}</p>
+        {isEditing === false && (
+          <p className='post-card__message'>{post.message}</p>
+        )}
+        {isEditing && (
+          <div className='updatePost'>
+            <textarea
+              defaultValue={post.message}
+              onChange={e => setEditPost(e.target.value)}
+            />
+            <button onClick={() => handleEdit(post._id)}>Valider</button>
+            <button onClick={() => setIsEditing(false)}>Annuler</button>
+          </div>
+        )}
       </div>
       <div className='post-card__footer'>
-        {isAuthenticated && <button onClick={handleEdit}>Editer</button>}
+        {isAuthenticated && (
+          <button onClick={() => setIsEditing(true)}>Editer</button>
+        )}
         {isAuthenticated && <button onClick={handleDelete}>Supprimer</button>}
       </div>
     </article>
