@@ -22,7 +22,7 @@ export default function PostCard({ post, userId }) {
       body: JSON.stringify(post),
     })
       .then(res => res.json())
-      .then(res => console.log(res));
+      .then(res => console.log(res.message));
     setIsEditing(false);
   };
 
@@ -36,7 +36,7 @@ export default function PostCard({ post, userId }) {
       },
     })
       .then(res => res.json())
-      .then(res => console.log(res));
+      .then(res => console.log(res.message));
   };
 
   return (
