@@ -15,11 +15,12 @@
   align-items: center;
 }
 
-.post-form input {
+.post-form textarea {
   width: 55vw;
-  height: 4rem;
+  height: 6rem;
   margin-top: 0.6rem;
   border: none;
+  resize: none;
   padding: 0.5rem;
   border-radius: 0.5rem;
 }

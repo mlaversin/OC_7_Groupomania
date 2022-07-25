@@ -1,12 +1,19 @@
 .post-card {
-  padding: 1.75rem;
+  padding: 0 1.75rem;
   margin-bottom: 0.75rem;
   max-width: 60vw;
   border: 1px solid #eee;
   border-radius: 1rem;
 
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
   &__username {
     font-weight: bold;
+    padding: 1.5rem 0;
   }
 
   &__createdAt {
@@ -14,5 +21,9 @@
     font-style: italic;
     color: grey;
     font-size: 14px;
+  }
+
+  &__footer {
+    padding: 1.5rem 0;
   }
 }

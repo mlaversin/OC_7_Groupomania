@@ -31,6 +31,7 @@ export default function LoginForm() {
       .then(res => res.json())
       .then(res => {
         if (res.token) {
+          localStorage.setItem('userId', JSON.stringify(res.userId));
           localStorage.setItem('token', JSON.stringify(res.token));
           navigate('/');
         } else {

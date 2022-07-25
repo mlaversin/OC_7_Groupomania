@@ -8,6 +8,11 @@ body {
   font-family: 'Lato', sans-serif;
 }
 
+input,
+textarea {
+  font-family: inherit;
+}
+
 .error-message {
   color: rgb(189, 24, 24);
 }

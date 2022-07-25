@@ -56,7 +56,7 @@ export default function PostForm() {
           <div>
             {/* <label htmlFor='message'>Votre message</label> */}
             <Field
-              type='text'
+              as='textarea'
               placeholder='Quoi de neuf ?'
               id='message'
               name='message'

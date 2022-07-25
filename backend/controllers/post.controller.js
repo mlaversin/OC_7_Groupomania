@@ -23,7 +23,7 @@ exports.createPost = (req, res) => {
 exports.getAllPosts = (req, res) => {
   Post.find()
     .sort({ createdAt: 'desc' })
-    .populate('user', 'firstname + lastname -_id')
+    .populate('user', 'firstname + lastname')
     .then(posts => {
       res.status(200).json(posts);
     })
@@ -55,7 +55,10 @@ exports.editPost = async (req, res) => {
     .then(post => post.userId)
     .catch(error => res.status(400).json({ error }));
 
-  if (req.auth.userRole === 'admin' || req.auth.userId === postUserId) {
+  if (
+    req.auth.userRole === 'admin' ||
+    req.auth.userId === post.user.toString()
+  ) {
     Post.updateOne(
       { _id: req.params.id },
       {
@@ -79,7 +82,10 @@ exports.editPost = async (req, res) => {
 exports.deletePost = (req, res) => {
   Post.findOne({ _id: req.params.id })
     .then(post => {
-      if (req.auth.userRole === 'admin' || req.auth.userId === post.userId) {
+      if (
+        req.auth.userRole === 'admin' ||
+        req.auth.userId === post.user.toString()
+      ) {
         Post.deleteOne({ _id: req.params.id })
           .then(() =>
             res.status(200).json({ message: 'Votre message a été supprimé.' })
