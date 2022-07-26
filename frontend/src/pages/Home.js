@@ -10,6 +10,10 @@ export default function Home() {
   const userId = JSON.parse(localStorage.getItem('userId'));
 
   useEffect(() => {
+    handleRefresh();
+  }, []);
+
+  const handleRefresh = () => {
     const token = JSON.parse(localStorage.getItem('token'));
 
     fetch('http://localhost:3000/api/post/', {
@@ -29,7 +33,7 @@ export default function Home() {
         setPosts(data);
       })
       .catch(err => console.log(err));
-  }, [posts, navigate]);
+  };
 
   return (
     <>
@@ -38,7 +42,12 @@ export default function Home() {
         <PostForm />
         <div className='posts-container'>
           {posts.map(post => (
-            <PostCard key={post._id} post={post} userId={userId} />
+            <PostCard
+              key={post._id}
+              post={post}
+              userId={userId}
+              handleRefresh={handleRefresh}
+            />
           ))}
         </div>
       </main>

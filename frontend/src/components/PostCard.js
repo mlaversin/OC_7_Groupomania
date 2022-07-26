@@ -3,7 +3,7 @@ import { UserContext } from '../contexts/UserContext';
 import Moment from 'moment';
 import LikeButton from './LikeButton';
 
-export default function PostCard({ post, userId }) {
+export default function PostCard({ post, userId, handleRefresh }) {
   const { userInfo } = useContext(UserContext);
 
   const createdAt = Moment(post.createdAt).format('DD/MM/YY à hh:mm');
@@ -27,7 +27,10 @@ export default function PostCard({ post, userId }) {
       body: JSON.stringify(post),
     })
       .then(res => res.json())
-      .then(res => console.log(res.message));
+      .then(res => {
+        handleRefresh();
+        console.log(res.message);
+      });
     setIsEditing(false);
   };
 
@@ -41,7 +44,10 @@ export default function PostCard({ post, userId }) {
       },
     })
       .then(res => res.json())
-      .then(res => console.log(res.message));
+      .then(res => {
+        handleRefresh();
+        console.log(res.message);
+      });
   };
 
   return (
