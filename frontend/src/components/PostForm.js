@@ -1,8 +1,11 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { UserContext } from '../contexts/UserContext';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
 export default function PostForm() {
+  const { userInfo } = useContext(UserContext);
+
   const token = JSON.parse(localStorage.getItem('token'));
 
   const validationSchema = Yup.object().shape({
@@ -57,7 +60,7 @@ export default function PostForm() {
             {/* <label htmlFor='message'>Votre message</label> */}
             <Field
               as='textarea'
-              placeholder='Quoi de neuf ?'
+              placeholder={`Quoi de neuf, ${userInfo.firstname} ?`}
               id='message'
               name='message'
             />
@@ -66,7 +69,9 @@ export default function PostForm() {
             </div>
           </div>
           <div>
-            <button className='post-btn' type='submit'>Publier</button>
+            <button className='post-btn' type='submit'>
+              Publier
+            </button>
           </div>
           <div className='error-message'>
             {errorMessage ? errorMessage : ''}

@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import { UserContext } from './contexts/UserContext';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -7,18 +9,27 @@ import Profile from './pages/Profile';
 import NotFound from './pages/NotFound';
 
 export default function App() {
+  const [userInfo, setUserInfo] = useState({
+    id: null,
+    firstname: null,
+    lastname: null,
+    role: null,
+  });
+
   return (
     <div className='app-container'>
-      <Header />
-      <BrowserRouter>
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='auth' element={<Auth />} />
-          <Route path='profil' element={<Profile />} />
-          <Route path='*' element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-      <Footer />
+      <UserContext.Provider value={{ userInfo, setUserInfo }}>
+        <Header />
+        <BrowserRouter>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='auth' element={<Auth />} />
+            <Route path='profil' element={<Profile />} />
+            <Route path='*' element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+        <Footer />
+      </UserContext.Provider>
     </div>
   );
 }

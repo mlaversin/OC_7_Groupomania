@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { UserContext } from '../contexts/UserContext';
 import { useNavigate } from 'react-router-dom';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
 export default function LoginForm() {
+  const { setUserInfo } = useContext(UserContext);
   const navigate = useNavigate();
 
   const validationSchema = Yup.object().shape({
@@ -33,6 +35,12 @@ export default function LoginForm() {
         if (res.token) {
           localStorage.setItem('userId', JSON.stringify(res.userId));
           localStorage.setItem('token', JSON.stringify(res.token));
+          setUserInfo({
+            id: res.userId,
+            firstname: res.firstname,
+            lastname: res.lastname,
+            role: res.role,
+          });
           navigate('/');
         } else {
           setErrorMessage(res.error);
