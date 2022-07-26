@@ -6,35 +6,43 @@ export default function LikeButton({ post, userId }) {
   const [likedPost, setLikedPost] = useState(false);
 
   const addLike = () => {
-    const token = JSON.parse(localStorage.getItem('token'));
-    const rate = {like:1}
-    fetch(`http://localhost:3000/api/post/${post._id}/like`, {
-      method: 'post',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(rate),
-    })
-      .then(res => res.json())
-      .then(res => console.log(res.message));
-    setLikedPost(true);
+    if (post.user._id !== userId) {
+      const token = JSON.parse(localStorage.getItem('token'));
+      const rate = { like: 1 };
+      fetch(`http://localhost:3000/api/post/${post._id}/like`, {
+        method: 'post',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(rate),
+      })
+        .then(res => res.json())
+        .then(res => console.log(res.message));
+      setLikedPost(true);
+    } else {
+      console.log("Impossible d'évaluer vos posts.");
+    }
   };
 
   const removeLike = () => {
-    const token = JSON.parse(localStorage.getItem('token'));
-    const rate = { like: 0 };
-    fetch(`http://localhost:3000/api/post/${post._id}/like`, {
-      method: 'post',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(rate),
-    })
-      .then(res => res.json())
-      .then(res => console.log(res.message));
+    if (post.user._id !== userId) {
+      const token = JSON.parse(localStorage.getItem('token'));
+      const rate = { like: 0 };
+      fetch(`http://localhost:3000/api/post/${post._id}/like`, {
+        method: 'post',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(rate),
+      })
+        .then(res => res.json())
+        .then(res => console.log(res.message));
       setLikedPost(false);
+    } else {
+      console.log("Impossible d'évaluer vos posts.");
+    }
   };
 
   useEffect(() => {

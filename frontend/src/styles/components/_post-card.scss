@@ -28,10 +28,6 @@
     display: flex;
     justify-content: space-between;
 
-    .like-icon {
-      width: 1rem;
-      cursor: pointer;
-    }
 
     .like-counter {
       padding-left: 1rem;
@@ -45,4 +41,9 @@
 
 .like-btn-active {
   color: #FD2D01;
+  cursor: pointer;
+}
+
+.like-btn-inactive {
+  cursor: pointer;
 }
