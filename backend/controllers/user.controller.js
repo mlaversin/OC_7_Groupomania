@@ -21,7 +21,23 @@ exports.getAllUsers = (req, res) => {
 };
 
 /*
- * This function allows you to retrieve the information of a single user
+ * This function allows you to retrieve the information of a single user from his token
+ */
+exports.getUserInfo = (req, res) => {
+  User.findOne({
+    _id: req.auth.userId,
+  })
+    .select('-password')
+    .then(user => {
+      res.status(200).json(user);
+    })
+    .catch(error => {
+      res.status(401).json({ message: 'Token invalid.' });
+    });
+};
+
+/*
+ * This function allows you to retrieve the information of a single user from his id
  */
 exports.getOneUser = (req, res) => {
   User.findOne({

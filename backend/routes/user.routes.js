@@ -12,8 +12,10 @@ router.post('/signup', email, password, authCtrl.signup);
 router.post('/login', authCtrl.login);
 
 router.get('/', auth, userCtrl.getAllUsers);
+router.get('/me', auth, userCtrl.getUserInfo);
 router.get('/:id', auth, userCtrl.getOneUser);
 router.put('/:id', auth, userCtrl.updateUser);
 router.delete('/:id', auth, userCtrl.deleteUser);
+
 
 module.exports = router;

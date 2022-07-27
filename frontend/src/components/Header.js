@@ -15,7 +15,7 @@ export default function Header() {
       <div className='header-logo'>
         <img src={logo} alt='Groupomania' className='logo-gpm' />
       </div>
-      {userInfo.id && (
+      {userInfo.role && (
         <button className='btn logout-btn' onClick={handleLogout}>
           Logout
         </button>
