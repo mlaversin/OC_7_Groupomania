@@ -3,7 +3,7 @@ import { UserContext } from '../contexts/UserContext';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
-export default function PostForm() {
+export default function PostForm({ handleRefresh }) {
   const { userInfo } = useContext(UserContext);
 
   const token = JSON.parse(localStorage.getItem('token'));
@@ -38,6 +38,7 @@ export default function PostForm() {
         } else {
           console.log(res.message);
           setErrorMessage('');
+          handleRefresh();
         }
       })
       .catch(err => {

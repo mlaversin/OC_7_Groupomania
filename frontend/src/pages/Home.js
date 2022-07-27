@@ -39,7 +39,7 @@ export default function Home() {
     <>
       <main className='homepage'>
         <h1>Page d'accueil</h1>
-        <PostForm />
+        <PostForm handleRefresh={handleRefresh} />
         <div className='posts-container'>
           {posts.map(post => (
             <PostCard
