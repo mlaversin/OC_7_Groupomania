@@ -74,7 +74,7 @@ export default function PostCard({ post, userId, handleRefresh }) {
         )}
       </div>
       <div className='post-card__footer'>
-        <LikeButton post={post} userId={userId} />
+        <LikeButton post={post} userId={userId} handleRefresh={handleRefresh} />
         {isAuthorized && (
           <div className='buttons'>
             <button onClick={() => setIsEditing(true)}>Editer</button>

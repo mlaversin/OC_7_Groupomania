@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 
-export default function LikeButton({ post, userId }) {
+export default function LikeButton({ post, userId, handleRefresh }) {
   const [likedPost, setLikedPost] = useState(false);
 
   const addLike = () => {
@@ -18,7 +18,10 @@ export default function LikeButton({ post, userId }) {
         body: JSON.stringify(rate),
       })
         .then(res => res.json())
-        .then(res => console.log(res.message));
+        .then(res => {
+          handleRefresh();
+          console.log(res.message);
+        });
       setLikedPost(true);
     } else {
       console.log("Impossible d'évaluer vos posts.");
@@ -38,7 +41,10 @@ export default function LikeButton({ post, userId }) {
         body: JSON.stringify(rate),
       })
         .then(res => res.json())
-        .then(res => console.log(res.message));
+        .then(res => {
+          handleRefresh();
+          console.log(res.message);
+        });
       setLikedPost(false);
     } else {
       console.log("Impossible d'évaluer vos posts.");
