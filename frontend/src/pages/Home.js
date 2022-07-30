@@ -14,7 +14,7 @@ export default function Home() {
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem('token'));
 
-    fetch('http://localhost:3000/api/user/me', {
+    fetch(`${process.env.REACT_APP_API_URL}/api/user/me`, {
       method: 'get',
       headers: {
         Authorization: `Bearer ${token}`,
@@ -41,7 +41,7 @@ export default function Home() {
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem('token'));
 
-    fetch('http://localhost:3000/api/post/', {
+    fetch(`${process.env.REACT_APP_API_URL}/api/post/`, {
       method: 'get',
       headers: {
         Authorization: `Bearer ${token}`,
@@ -63,7 +63,7 @@ export default function Home() {
   const handleRefresh = () => {
     const token = JSON.parse(localStorage.getItem('token'));
 
-    fetch('http://localhost:3000/api/post/', {
+    fetch(`${process.env.REACT_APP_API_URL}/api/post/`, {
       method: 'get',
       headers: {
         Authorization: `Bearer ${token}`,

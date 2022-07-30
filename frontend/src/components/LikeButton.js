@@ -9,7 +9,7 @@ export default function LikeButton({ post, userId, handleRefresh }) {
     if (post.user._id !== userId) {
       const token = JSON.parse(localStorage.getItem('token'));
       const rate = { like: 1 };
-      fetch(`http://localhost:3000/api/post/${post._id}/like`, {
+      fetch(`${process.env.REACT_APP_API_URL}/api/post/${post._id}/like`, {
         method: 'post',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -32,7 +32,7 @@ export default function LikeButton({ post, userId, handleRefresh }) {
     if (post.user._id !== userId) {
       const token = JSON.parse(localStorage.getItem('token'));
       const rate = { like: 0 };
-      fetch(`http://localhost:3000/api/post/${post._id}/like`, {
+      fetch(`${process.env.REACT_APP_API_URL}/api/post/${post._id}/like`, {
         method: 'post',
         headers: {
           Authorization: `Bearer ${token}`,

@@ -22,7 +22,7 @@ export default function PostForm({ handleRefresh }) {
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = values => {
-    fetch('http://localhost:3000/api/post', {
+    fetch(`${process.env.REACT_APP_API_URL}/api/post`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,

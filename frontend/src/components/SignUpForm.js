@@ -23,7 +23,7 @@ export default function SignUpForm() {
   };
 
   const handleSubmit = values => {
-    fetch('http://localhost:3000/api/user/signup', {
+    fetch(`${process.env.REACT_APP_API_URL}/api/user/signup`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

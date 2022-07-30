@@ -23,7 +23,7 @@ export default function LoginForm() {
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = values => {
-    fetch('http://localhost:3000/api/user/login', {
+    fetch(`${process.env.REACT_APP_API_URL}/api/user/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

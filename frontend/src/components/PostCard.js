@@ -18,7 +18,7 @@ export default function PostCard({ post, userId, handleRefresh }) {
   const handleEdit = id => {
     const token = JSON.parse(localStorage.getItem('token'));
     const post = { message: editPost };
-    fetch(`http://localhost:3000/api/post/${id}`, {
+    fetch(`${process.env.REACT_APP_API_URL}/api/post/${id}`, {
       method: 'put',
       headers: {
         Authorization: `Bearer ${token}`,
@@ -36,7 +36,7 @@ export default function PostCard({ post, userId, handleRefresh }) {
 
   const handleDelete = () => {
     const token = JSON.parse(localStorage.getItem('token'));
-    fetch(`http://localhost:3000/api/post/${post._id}`, {
+    fetch(`${process.env.REACT_APP_API_URL}/api/post/${post._id}`, {
       method: 'delete',
       headers: {
         Authorization: `Bearer ${token}`,
