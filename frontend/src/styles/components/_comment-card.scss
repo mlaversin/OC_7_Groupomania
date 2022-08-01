@@ -1,0 +1,32 @@
+.comment-card {
+  padding: 0 0.75rem;
+  border: 1px solid #eee;
+  margin-bottom: 0.75rem;
+  border-radius: 1rem;
+  font-size: 14px;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__username {
+    font-weight: bold;
+  }
+
+  &__createdAt {
+    margin: 1rem 0;
+    font-style: italic;
+    color: grey;
+    font-size: 14px;
+  }
+
+  &__comment {
+    padding-bottom: 1rem;
+  }
+}
+
+.comment-counter {
+  margin-left: 1rem;
+}

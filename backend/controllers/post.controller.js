@@ -1,6 +1,4 @@
 const Post = require('../models/Post');
-const User = require('../models/User');
-
 /*
  * This function is used to create a post
  */
@@ -132,3 +130,31 @@ exports.likePost = (req, res) => {
     })
     .catch(error => res.status(400).json({ error }));
 };
+
+
+/*
+ * This function is used to add a comment
+ */
+exports.createComment = (req, res) => {
+  try {
+    return Post.findByIdAndUpdate(
+      req.params.id,
+      {
+        $push: {
+          comments: {
+            userId: req.body.userId,
+            firstname: req.body.firstname,
+            lastname: req.body.lastname,
+            comment: req.body.comment,
+            timestamp: new Date().getTime(),
+          },
+        },
+      },
+      { new: true }
+    )
+      .then(() => res.status(201).json({ message: 'commentaire ajouté !' }))
+      .catch(error => res.status(500).json({ error }));
+  } catch (error) {
+    return res.status(400).json({ error });
+  }
+}

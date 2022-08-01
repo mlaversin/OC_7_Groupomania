@@ -14,6 +14,18 @@ const postSchema = mongoose.Schema(
     pictureUrl: { type: String },
     likes: { type: Number, required: true, default: 0 },
     usersLiked: { type: [String], required: true, default: [] },
+    comments: {
+      type: [
+        {
+          userId: String,
+          firstname: String,
+          lastname: String,
+          comment: String,
+          timestamp: Number,
+        },
+      ],
+      required: true,
+    }
   },
   { timestamps: true }
 );

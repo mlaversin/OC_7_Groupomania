@@ -20,7 +20,6 @@ export default function LikeButton({ post, userId, handleRefresh }) {
         .then(res => res.json())
         .then(res => {
           handleRefresh();
-          console.log(res.message);
         });
       setLikedPost(true);
     } else {

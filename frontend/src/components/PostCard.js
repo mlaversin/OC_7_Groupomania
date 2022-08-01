@@ -1,7 +1,9 @@
-import { useState, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../contexts/UserContext';
 import Moment from 'moment';
 import LikeButton from './LikeButton';
+import CommentButton from './CommentButton'
+import CommentCard from './CommentCard';
 
 export default function PostCard({ post, userId, handleRefresh }) {
   const { userInfo } = useContext(UserContext);
@@ -14,6 +16,12 @@ export default function PostCard({ post, userId, handleRefresh }) {
 
   const [isEditing, setIsEditing] = useState(false);
   const [editPost, setEditPost] = useState(null);
+
+  const [comments, setComments] = useState([]);
+
+  useEffect(() => {
+    setComments(post.comments);
+  }, [post.comments]);
 
   const handleEdit = id => {
     const token = JSON.parse(localStorage.getItem('token'));
@@ -63,7 +71,7 @@ export default function PostCard({ post, userId, handleRefresh }) {
           <p className='post-card__message'>{post.message}</p>
         )}
         {isEditing && (
-          <div className='updatePost'>
+          <div>
             <textarea
               defaultValue={post.message}
               onChange={e => setEditPost(e.target.value)}
@@ -75,14 +83,27 @@ export default function PostCard({ post, userId, handleRefresh }) {
       </div>
       <div className='post-card__footer'>
         <LikeButton post={post} userId={userId} handleRefresh={handleRefresh} />
-        {isAuthorized && (
-          <div className='buttons'>
-            <button onClick={() => setIsEditing(true)}>Editer</button>
-            <button className='delete-btn' onClick={handleDelete}>
-              Supprimer
-            </button>
-          </div>
-        )}
+        <CommentButton commentsNumber={comments.length} />
+        <div className="edit-delete-buttons">
+          {isAuthorized && (
+            <div>
+              <button onClick={() => setIsEditing(true)}>Editer</button>
+              <button className='delete-btn' onClick={handleDelete}>
+                Supprimer
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+      <div className='comments'>
+        {comments.map(comment => (
+          <CommentCard
+            key={comment._id}
+            comment={comment}
+            userId={userId}
+            handleRefresh={handleRefresh}
+          />
+        ))}
       </div>
     </article>
   );
