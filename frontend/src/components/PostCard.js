@@ -4,11 +4,10 @@ import Moment from 'moment';
 import LikeButton from './LikeButton';
 import CommentButton from './CommentButton'
 import CommentCard from './CommentCard';
+import CommentForm from './CommentForm';
 
 export default function PostCard({ post, userId, handleRefresh }) {
   const { userInfo } = useContext(UserContext);
-
-  const createdAt = Moment(post.createdAt).format('DD/MM/YY à hh:mm');
 
   const isAuthenticated = userId === post.user._id ? true : false;
   const isAdmin = userInfo.role === 'admin' ? true : false;
@@ -64,7 +63,9 @@ export default function PostCard({ post, userId, handleRefresh }) {
         <p className='post-card__username'>
           {post.user.firstname + ' ' + post.user.lastname}
         </p>
-        <p className='post-card__createdAt'>Posté le {createdAt}</p>
+        <p className='post-card__createdAt'>
+          Posté le {Moment(post.createdAt).format('DD/MM/YY à hh:mm')}
+        </p>
       </div>
       <div className='post-card__body'>
         {isEditing === false && (
@@ -84,7 +85,7 @@ export default function PostCard({ post, userId, handleRefresh }) {
       <div className='post-card__footer'>
         <LikeButton post={post} userId={userId} handleRefresh={handleRefresh} />
         <CommentButton commentsNumber={comments.length} />
-        <div className="edit-delete-buttons">
+        <div className='edit-delete-buttons'>
           {isAuthorized && (
             <div>
               <button onClick={() => setIsEditing(true)}>Editer</button>
@@ -96,11 +97,13 @@ export default function PostCard({ post, userId, handleRefresh }) {
         </div>
       </div>
       <div className='comments'>
+        <CommentForm post={post} handleRefresh={handleRefresh} />
         {comments.map(comment => (
           <CommentCard
             key={comment._id}
             comment={comment}
             userId={userId}
+            post={post}
             handleRefresh={handleRefresh}
           />
         ))}

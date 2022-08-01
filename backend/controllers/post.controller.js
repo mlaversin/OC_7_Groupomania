@@ -131,7 +131,6 @@ exports.likePost = (req, res) => {
     .catch(error => res.status(400).json({ error }));
 };
 
-
 /*
  * This function is used to add a comment
  */
@@ -157,4 +156,52 @@ exports.createComment = (req, res) => {
   } catch (error) {
     return res.status(400).json({ error });
   }
-}
+};
+
+/*
+ * This function is used to edit a comment
+ */
+exports.editComment = (req, res) => {
+  try {
+    return Post.findById(req.params.id, (err, docs) => {
+      const comment = docs.comments.find(comment =>
+        comment._id.equals(req.body.commentId)
+      );
+
+      if (!comment)
+        return res.status(400).json({ message: 'Commentaire inconnu' });
+      comment.comment = req.body.comment;
+
+      return docs.save(err => {
+        if (!err)
+          return res.status(200).json({ message: 'Commentaire modifié' });
+        return res.status(500).send(err);
+      });
+    });
+  } catch (err) {
+    return res.status(400).send(err);
+  }
+};
+
+/*
+ * This function is used to delete a comment
+ */
+exports.deleteComment = (req, res) => {
+  try {
+    return Post.findByIdAndUpdate(
+      req.params.id,
+      {
+        $pull: {
+          comments: {
+            _id: req.body.commentId,
+          },
+        },
+      },
+      { new: true }
+    )
+      .then(() => res.status(200).json({ message: 'commentaire supprimé !' }))
+      .catch(error => res.status(500).json({ error }));
+  } catch (error) {
+    return res.status(400).json({ error });
+  }
+};
