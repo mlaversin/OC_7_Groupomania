@@ -81,6 +81,17 @@ export default function PostCard({ post, userId, handleRefresh }) {
             <button onClick={() => setIsEditing(false)}>Annuler</button>
           </div>
         )}
+        <div className='post-image'>
+          {post.imageUrl ? (
+            <img
+              className='post-body__container__image'
+              src={post.imageUrl}
+              alt='post'
+            />
+          ) : (
+            ''
+          )}
+        </div>
       </div>
       <div className='post-card__footer'>
         <LikeButton post={post} userId={userId} handleRefresh={handleRefresh} />

@@ -11,7 +11,7 @@ const postSchema = mongoose.Schema(
       required: true,
       minLength: [6, 'Message trop court !'],
     },
-    pictureUrl: { type: String },
+    imageUrl: { type: String },
     likes: { type: Number, required: true, default: 0 },
     usersLiked: { type: [String], required: true, default: [] },
     comments: {

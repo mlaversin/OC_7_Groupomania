@@ -1,34 +1,35 @@
 import { useState, useContext } from 'react';
 import { UserContext } from '../contexts/UserContext';
-import { Formik, Field, Form, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
 
 export default function PostForm({ handleRefresh }) {
   const { userInfo } = useContext(UserContext);
-
   const token = JSON.parse(localStorage.getItem('token'));
 
-  const validationSchema = Yup.object().shape({
-    message: Yup.string()
-      .required('Veuillez entrer un message')
-      .min(10, 'Votre message est trop court.')
-      .max(500, 'Votre message ne peut pas dépasser 500 caractères'),
-  });
-
-  const initialValues = {
-    message: '',
-  };
-
+  const [message, setMessage] = useState();
+  const [fileUpload, setFileUpload] = useState();
   const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSubmit = values => {
+  const handleMessage = e => {
+    setMessage(e.target.value);
+  };
+
+  const handleUpload = e => {
+    setFileUpload(e.target.files[0]);
+  };
+
+  const handleSubmit = () => {
+    const formData = new FormData();
+    formData.append('message', message);
+    formData.append('image', fileUpload);
+
+    console.log(...formData);
+
     fetch(`${process.env.REACT_APP_API_URL}/api/post`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(values),
+      body: formData,
     })
       .then(res => res.json())
       .then(res => {
@@ -48,37 +49,37 @@ export default function PostForm({ handleRefresh }) {
 
   return (
     <div className='form post-form'>
-      <Formik
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={(values, { resetForm }) => {
-          handleSubmit(values);
-          resetForm();
+      <form
+        onSubmit={e => {
+          e.preventDefault();
+          handleSubmit();
+          e.target.reset();
         }}
       >
-        <Form>
-          <div>
-            {/* <label htmlFor='message'>Votre message</label> */}
-            <Field
-              as='textarea'
-              placeholder={`Quoi de neuf, ${userInfo.firstname} ?`}
-              id='message'
-              name='message'
-            />
-            <div className='error-message'>
-              <ErrorMessage name='message' />
-            </div>
-          </div>
-          <div>
-            <button className='post-btn' type='submit'>
-              Publier
-            </button>
-          </div>
-          <div className='error-message'>
-            {errorMessage ? errorMessage : ''}
-          </div>
-        </Form>
-      </Formik>
+        <div>
+          <textarea
+            placeholder={`Quoi de neuf, ${userInfo.firstname} ?`}
+            id='message'
+            name='message'
+            onChange={e => handleMessage(e)}
+          />
+        </div>
+        <div>
+          <input
+            type='file'
+            id='file'
+            name='file'
+            accept='image/jpg, image/jpeg, image/png, image/gif '
+            onChange={e => handleUpload(e)}
+          />
+        </div>
+        <div>
+          <button className='post-btn' type='submit'>
+            Publier
+          </button>
+        </div>
+        <div className='error-message'>{errorMessage ? errorMessage : ''}</div>
+      </form>
     </div>
   );
 }

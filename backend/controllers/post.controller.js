@@ -1,17 +1,37 @@
 const Post = require('../models/Post');
+const fs = require('fs');
 /*
  * This function is used to create a post
  */
 exports.createPost = (req, res) => {
-  const post = new Post({ ...req.body, user: req.auth.userId });
-  post
-    .save()
-    .then(() =>
-      res.status(201).json({ message: 'Votre message a bien été envoyé.' })
-    )
-    .catch(error => {
-      res.status(400).json({ error });
+  console.log(req.protocol, req.get('host'), req.file.filename);
+  if (req.file) {
+    const post = new Post({
+      ...req.body,
+      user: req.auth.userId,
+      imageUrl: `${req.protocol}://${req.get('host')}/uploads/${
+        req.file.filename
+      }`,
     });
+    post
+      .save()
+      .then(() =>
+        res.status(201).json({ message: 'Votre message a bien été envoyé.' })
+      )
+      .catch(error => {
+        res.status(400).json({ error });
+      });
+  } else {
+    const post = new Post({ ...req.body, user: req.auth.userId });
+    post
+      .save()
+      .then(() =>
+        res.status(201).json({ message: 'Votre message a bien été envoyé.' })
+      )
+      .catch(error => {
+        res.status(400).json({ error });
+      });
+  }
 };
 
 /*
@@ -54,14 +74,55 @@ exports.editPost = async (req, res) => {
         req.auth.userRole === 'admin' ||
         req.auth.userId === post.user.toString()
       ) {
-        Post.updateOne(
-          { _id: req.params.id },
-          { $set: { message: req.body.message } }
-        )
-          .then(() =>
-            res.status(200).json({ message: 'Votre message a été modifié.' })
+        // if old file + new file
+        if (req.file && post.imageUrl) {
+          const filename = post.imageUrl.split('/uploads/')[1];
+          fs.unlink(`uploads/${filename}`, error => {
+            if (error) console.error('ignored', error.message);
+          });
+          Post.updateOne(
+            { _id: req.params.id },
+            {
+              $set: {
+                message: req.body.message,
+                imageUrl: `${req.protocol}://${req.get('host')}/uploads/${
+                  req.file.filename
+                }`,
+              },
+            }
           )
-          .catch(error => res.status(400).json({ error }));
+            .then(() =>
+              res.status(200).json({ message: 'Votre message a été modifié.' })
+            )
+            .catch(error => res.status(400).json({ error }));
+        } else if (post.imageUrl) {
+          // if no old file but new file
+          Post.updateOne(
+            { _id: req.params.id },
+            {
+              $set: {
+                message: req.body.message,
+                imageUrl: `${req.protocol}://${req.get('host')}/uploads/${
+                  req.file.filename
+                }`,
+              },
+            }
+          )
+            .then(() =>
+              res.status(200).json({ message: 'Votre message a été modifié.' })
+            )
+            .catch(error => res.status(400).json({ error }));
+        } else {
+          // if no old file and no new file
+          Post.updateOne(
+            { _id: req.params.id },
+            { $set: { message: req.body.message } }
+          )
+            .then(() =>
+              res.status(200).json({ message: 'Votre message a été modifié.' })
+            )
+            .catch(error => res.status(400).json({ error }));
+        }
       } else {
         res.status(403).json({
           message: "Vous n'êtes pas autorisé à effectuer cette requête.",
