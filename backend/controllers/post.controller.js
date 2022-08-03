@@ -5,6 +5,7 @@ const fs = require('fs');
  */
 exports.createPost = (req, res) => {
   if (req.file) {
+    console.log(req.file);
     const post = new Post({
       ...req.body,
       user: req.auth.userId,

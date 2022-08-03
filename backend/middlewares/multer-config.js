@@ -12,10 +12,33 @@ const storage = multer.diskStorage({
     callback(null, 'uploads');
   },
   filename: (req, file, callback) => {
-    const name = (Math.random() + 1).toString(36).substring(2);
+    const originalName = file.originalname;
+    const name = originalName
+      .split(' ')
+      .join('_')
+      .slice(0, originalName.lastIndexOf('.'));
     const extension = MIME_TYPES[file.mimetype];
     callback(null, name + Date.now() + '.' + extension);
   },
 });
 
-module.exports = multer({ storage }).single('image');
+function checkFileType(file, cb) {
+  const filetypes = /jpeg|jpg|png|gif/;
+  const mimetype = filetypes.test(file.mimetype);
+
+  if (mimetype) {
+    return cb(null, true);
+  } else {
+    cb('Type de fichier non pris en charge.');
+  }
+}
+
+module.exports = multer({
+  storage: storage,
+  limits: {
+    fileSize: 500000,
+  },
+  fileFilter: function (_req, file, cb) {
+    checkFileType(file, cb);
+  },
+}).single('image');
