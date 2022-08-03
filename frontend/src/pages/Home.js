@@ -1,8 +1,8 @@
 import { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../contexts/UserContext';
 import { useNavigate } from 'react-router-dom';
-import PostForm from '../components/PostForm';
-import PostCard from '../components/PostCard';
+import PostForm from '../components/forms/PostForm';
+import PostCard from '../components/cards/PostCard';
 
 export default function Home() {
   const { setUserInfo } = useContext(UserContext);

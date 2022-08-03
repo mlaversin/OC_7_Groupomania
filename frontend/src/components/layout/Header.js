@@ -1,6 +1,6 @@
 import { useContext } from 'react';
-import { UserContext } from '../contexts/UserContext';
-import logo from '../assets/logo-gpm.png';
+import { UserContext } from '../../contexts/UserContext';
+import logo from '../../assets/logo-gpm.png';
 
 export default function Header() {
   const { userInfo, setUserInfo } = useContext(UserContext);

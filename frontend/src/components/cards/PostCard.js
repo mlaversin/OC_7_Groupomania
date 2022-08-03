@@ -1,10 +1,10 @@
 import { useState, useEffect, useContext } from 'react';
-import { UserContext } from '../contexts/UserContext';
+import { UserContext } from '../../contexts/UserContext';
 import Moment from 'moment';
-import LikeButton from './LikeButton';
-import CommentButton from './CommentButton';
+import LikeButton from '../buttons/LikeButton';
+import CommentButton from '../buttons/CommentButton';
 import CommentCard from './CommentCard';
-import CommentForm from './CommentForm';
+import CommentForm from '../forms/CommentForm';
 
 export default function PostCard({ post, userId, handleRefresh }) {
   const { userInfo } = useContext(UserContext);

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import LoginForm from '../components/LoginForm';
-import SignUpForm from '../components/SignUpForm';
+import LoginForm from '../components/forms/LoginForm';
+import SignUpForm from '../components/forms/SignUpForm';
 
 export default function Auth() {
   const [loginForm, setLoginForm] = useState(true);

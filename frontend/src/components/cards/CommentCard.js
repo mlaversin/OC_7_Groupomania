@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import { UserContext } from '../contexts/UserContext';
+import { UserContext } from '../../contexts/UserContext';
 import Moment from 'moment';
 
 export default function CommentCard({ post, comment, userId, handleRefresh }) {
