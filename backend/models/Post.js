@@ -9,7 +9,7 @@ const postSchema = mongoose.Schema(
     message: {
       type: String,
       required: true,
-      minLength: [6, 'Message trop court !'],
+      minLength: [10, 'Message trop court !'],
     },
     imageUrl: { type: String },
     likes: { type: Number, required: true, default: 0 },
@@ -25,7 +25,7 @@ const postSchema = mongoose.Schema(
         },
       ],
       required: true,
-    }
+    },
   },
   { timestamps: true }
 );

@@ -20,9 +20,7 @@ export default function PostForm({ handleRefresh }) {
   const handleSubmit = () => {
     const formData = new FormData();
     formData.append('message', message);
-    formData.append('image', fileUpload);
-
-    console.log(...formData);
+    formData.append('image', fileUpload || '');
 
     fetch(`${process.env.REACT_APP_API_URL}/api/post`, {
       method: 'POST',
@@ -45,6 +43,8 @@ export default function PostForm({ handleRefresh }) {
       .catch(err => {
         console.log(err);
       });
+    setMessage(null);
+    setFileUpload(null);
   };
 
   return (
@@ -54,6 +54,7 @@ export default function PostForm({ handleRefresh }) {
           e.preventDefault();
           handleSubmit();
           e.target.reset();
+          setFileUpload(null);
         }}
       >
         <div>
@@ -69,7 +70,7 @@ export default function PostForm({ handleRefresh }) {
             type='file'
             id='file'
             name='file'
-            accept='image/jpg, image/jpeg, image/png, image/gif '
+            accept='image/jpg, image/jpeg, image/png, image/gif'
             onChange={e => handleUpload(e)}
           />
         </div>

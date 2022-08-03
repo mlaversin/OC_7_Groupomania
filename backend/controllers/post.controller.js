@@ -4,7 +4,6 @@ const fs = require('fs');
  * This function is used to create a post
  */
 exports.createPost = (req, res) => {
-  console.log(req.protocol, req.get('host'), req.file.filename);
   if (req.file) {
     const post = new Post({
       ...req.body,
@@ -19,6 +18,12 @@ exports.createPost = (req, res) => {
         res.status(201).json({ message: 'Votre message a bien été envoyé.' })
       )
       .catch(error => {
+        if (req.file) {
+          const filename = post.imageUrl.split('/uploads/')[1];
+          fs.unlink(`uploads/${filename}`, error => {
+            if (error) console.error('ignored', error.message);
+          });
+        }
         res.status(400).json({ error });
       });
   } else {
@@ -75,7 +80,7 @@ exports.editPost = async (req, res) => {
         req.auth.userId === post.user.toString()
       ) {
         // if old file + new file
-        if (req.file && post.imageUrl) {
+        if (post.imageUrl && req.file) {
           const filename = post.imageUrl.split('/uploads/')[1];
           fs.unlink(`uploads/${filename}`, error => {
             if (error) console.error('ignored', error.message);
@@ -92,10 +97,12 @@ exports.editPost = async (req, res) => {
             }
           )
             .then(() =>
-              res.status(200).json({ message: 'Votre message a été modifié.' })
+              res
+                .status(200)
+                .json({ message: 'Votre message a été modifié. 1' })
             )
             .catch(error => res.status(400).json({ error }));
-        } else if (post.imageUrl) {
+        } else if (req.file) {
           // if no old file but new file
           Post.updateOne(
             { _id: req.params.id },
@@ -109,7 +116,9 @@ exports.editPost = async (req, res) => {
             }
           )
             .then(() =>
-              res.status(200).json({ message: 'Votre message a été modifié.' })
+              res
+                .status(200)
+                .json({ message: 'Votre message a été modifié. 2' })
             )
             .catch(error => res.status(400).json({ error }));
         } else {
@@ -119,7 +128,9 @@ exports.editPost = async (req, res) => {
             { $set: { message: req.body.message } }
           )
             .then(() =>
-              res.status(200).json({ message: 'Votre message a été modifié.' })
+              res
+                .status(200)
+                .json({ message: 'Votre message a été modifié. 3' })
             )
             .catch(error => res.status(400).json({ error }));
         }
@@ -143,9 +154,15 @@ exports.deletePost = (req, res) => {
         req.auth.userId === post.user.toString()
       ) {
         Post.deleteOne({ _id: req.params.id })
-          .then(() =>
-            res.status(200).json({ message: 'Votre message a été supprimé.' })
-          )
+          .then(() => {
+            if (post.imageUrl) {
+              const filename = post.imageUrl.split('/uploads/')[1];
+              fs.unlink(`uploads/${filename}`, error => {
+                if (error) console.error('ignored', error.message);
+              });
+            }
+            res.status(200).json({ message: 'Votre message a été supprimé.' });
+          })
           .catch(error => res.status(400).json({ error }));
       } else {
         res.status(403).json({
@@ -157,7 +174,7 @@ exports.deletePost = (req, res) => {
 };
 
 /*
- * This function is used to add a like
+ * This function is used to add/remove a like
  */
 exports.likePost = (req, res) => {
   const like = req.body.like;

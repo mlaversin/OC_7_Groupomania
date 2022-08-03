@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../contexts/UserContext';
 import Moment from 'moment';
 import LikeButton from './LikeButton';
-import CommentButton from './CommentButton'
+import CommentButton from './CommentButton';
 import CommentCard from './CommentCard';
 import CommentForm from './CommentForm';
 
@@ -14,7 +14,9 @@ export default function PostCard({ post, userId, handleRefresh }) {
   const isAuthorized = isAuthenticated || isAdmin ? true : false;
 
   const [isEditing, setIsEditing] = useState(false);
-  const [editPost, setEditPost] = useState(null);
+
+  const [message, setMessage] = useState(post.message);
+  const [fileUpload, setFileUpload] = useState();
 
   const [comments, setComments] = useState([]);
 
@@ -24,14 +26,17 @@ export default function PostCard({ post, userId, handleRefresh }) {
 
   const handleEdit = id => {
     const token = JSON.parse(localStorage.getItem('token'));
-    const post = { message: editPost };
+
+    const formData = new FormData();
+    formData.append('message', message );
+    formData.append('image', fileUpload || '');
+
     fetch(`${process.env.REACT_APP_API_URL}/api/post/${id}`, {
       method: 'put',
       headers: {
         Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(post),
+      body: formData,
     })
       .then(res => res.json())
       .then(res => {
@@ -69,29 +74,35 @@ export default function PostCard({ post, userId, handleRefresh }) {
       </div>
       <div className='post-card__body'>
         {isEditing === false && (
-          <p className='post-card__message'>{post.message}</p>
+          <>
+            <p className='post-card__message'>{post.message}</p>
+            <div className='post-card__image'>
+              {post.imageUrl ? (
+                <img
+                  className='post-card__image'
+                  src={post.imageUrl}
+                  alt='post'
+                />
+              ) : (
+                ''
+              )}
+            </div>
+          </>
         )}
         {isEditing && (
           <div>
             <textarea
-              defaultValue={post.message}
-              onChange={e => setEditPost(e.target.value)}
+              defaultValue={message}
+              onChange={e => setMessage(e.target.value)}
+            />
+            <input
+              type='file'
+              onChange={e => setFileUpload(e.target.files[0])}
             />
             <button onClick={() => handleEdit(post._id)}>Valider</button>
             <button onClick={() => setIsEditing(false)}>Annuler</button>
           </div>
         )}
-        <div className='post-image'>
-          {post.imageUrl ? (
-            <img
-              className='post-body__container__image'
-              src={post.imageUrl}
-              alt='post'
-            />
-          ) : (
-            ''
-          )}
-        </div>
       </div>
       <div className='post-card__footer'>
         <LikeButton post={post} userId={userId} handleRefresh={handleRefresh} />

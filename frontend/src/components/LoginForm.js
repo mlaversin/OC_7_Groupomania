@@ -77,7 +77,7 @@ export default function LoginForm() {
             <button type='submit'>Connexion</button>
           </div>
           <div className='error-message'>
-            {errorMessage ? errorMessage : ''}
+            {errorMessage}
           </div>
         </Form>
       </Formik>

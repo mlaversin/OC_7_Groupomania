@@ -62,6 +62,14 @@
 }
 
 .edit-delete-buttons {
-  flex-basis: 25%;
+  flex-basis: 30%;
   align-self: flex-end;
+}
+
+.post-card__image {
+  width: 85%;
+  margin: 1rem auto 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
