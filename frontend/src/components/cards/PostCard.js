@@ -25,11 +25,11 @@ export default function PostCard({ post, userId, handleRefresh }) {
   }, [post.comments]);
 
   const handleEdit = id => {
-    const token = JSON.parse(localStorage.getItem('token'));
-
     const formData = new FormData();
-    formData.append('message', message );
+    formData.append('message', message);
     formData.append('image', fileUpload || '');
+
+    const token = JSON.parse(localStorage.getItem('token'));
 
     fetch(`${process.env.REACT_APP_API_URL}/api/post/${id}`, {
       method: 'put',
@@ -97,6 +97,7 @@ export default function PostCard({ post, userId, handleRefresh }) {
             />
             <input
               type='file'
+              accept='image/jpg, image/jpeg, image/png, image/gif'
               onChange={e => setFileUpload(e.target.files[0])}
             />
             <button onClick={() => handleEdit(post._id)}>Valider</button>
@@ -108,7 +109,7 @@ export default function PostCard({ post, userId, handleRefresh }) {
         <LikeButton post={post} userId={userId} handleRefresh={handleRefresh} />
         <CommentButton commentsNumber={comments.length} />
         <div className='edit-delete-buttons'>
-          {isAuthorized && (
+          {isAuthorized && isEditing === false && (
             <div>
               <button onClick={() => setIsEditing(true)}>Editer</button>
               <button className='delete-btn' onClick={handleDelete}>
