@@ -17,6 +17,7 @@ export default function PostCard({ post, userId, handleRefresh }) {
 
   const [message, setMessage] = useState(post.message);
   const [fileUpload, setFileUpload] = useState();
+  const [deleteFile, setDeleteFile] = useState(false);
 
   const [comments, setComments] = useState([]);
 
@@ -28,6 +29,7 @@ export default function PostCard({ post, userId, handleRefresh }) {
     const formData = new FormData();
     formData.append('message', message);
     formData.append('image', fileUpload || '');
+    formData.append('deleteFile', deleteFile);
 
     const token = JSON.parse(localStorage.getItem('token'));
 
@@ -100,6 +102,9 @@ export default function PostCard({ post, userId, handleRefresh }) {
               accept='image/jpg, image/jpeg, image/png, image/gif'
               onChange={e => setFileUpload(e.target.files[0])}
             />
+            <button onClick={() => setDeleteFile(true)}>
+              Supprimer l'image
+            </button>
             <button onClick={() => handleEdit(post._id)}>Valider</button>
             <button onClick={() => setIsEditing(false)}>Annuler</button>
           </div>

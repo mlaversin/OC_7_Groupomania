@@ -80,6 +80,15 @@ exports.editPost = async (req, res) => {
         req.auth.userRole === 'admin' ||
         req.auth.userId === post.user.toString()
       ) {
+        // allows user to remove image from the post
+        if (post.imageUrl && req.body.deleteFile === 'true') {
+          const filename = post.imageUrl.split('/uploads/')[1];
+          fs.unlink(`uploads/${filename}`, error => {
+            if (error) console.error('ignored', error.message);
+          });
+          post.imageUrl = undefined;
+          post.save();
+        }
         // if old file + new file
         if (post.imageUrl && req.file) {
           const filename = post.imageUrl.split('/uploads/')[1];
