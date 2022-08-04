@@ -224,7 +224,9 @@ exports.createComment = (req, res) => {
       },
       { new: true }
     )
-      .then(() => res.status(201).json({ message: 'commentaire ajouté !' }))
+      .then(() =>
+        res.status(201).json({ message: 'Votre commentaire a été ajouté.' })
+      )
       .catch(error => res.status(500).json({ error }));
   } catch (error) {
     return res.status(400).json({ error });
@@ -242,12 +244,14 @@ exports.editComment = (req, res) => {
       );
 
       if (!comment)
-        return res.status(400).json({ message: 'Commentaire inconnu' });
+        return res.status(400).json({ message: 'Commentaire inconnu.' });
       comment.comment = req.body.comment;
 
       return docs.save(err => {
         if (!err)
-          return res.status(200).json({ message: 'Commentaire modifié' });
+          return res
+            .status(200)
+            .json({ message: 'Votre commentaire a été mis à jour.' });
         return res.status(500).send(err);
       });
     });
@@ -272,7 +276,9 @@ exports.deleteComment = (req, res) => {
       },
       { new: true }
     )
-      .then(() => res.status(200).json({ message: 'commentaire supprimé !' }))
+      .then(() =>
+        res.status(200).json({ message: 'Votre commentaire a été supprimé.' })
+      )
       .catch(error => res.status(500).json({ error }));
   } catch (error) {
     return res.status(400).json({ error });
