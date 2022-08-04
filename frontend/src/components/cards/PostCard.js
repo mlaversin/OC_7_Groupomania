@@ -46,6 +46,7 @@ export default function PostCard({ post, userId, handleRefresh }) {
         console.log(res.message);
       });
     setIsEditing(false);
+    setFileUpload(null);
   };
 
   const handleDelete = () => {
@@ -102,9 +103,12 @@ export default function PostCard({ post, userId, handleRefresh }) {
               accept='image/jpg, image/jpeg, image/png, image/gif'
               onChange={e => setFileUpload(e.target.files[0])}
             />
-            <button onClick={() => setDeleteFile(true)}>
-              Supprimer l'image
-            </button>
+            {post.imageUrl && (
+              <button onClick={() => setDeleteFile(true)}>
+                Supprimer l'image
+              </button>
+            )}
+
             <button onClick={() => handleEdit(post._id)}>Valider</button>
             <button onClick={() => setIsEditing(false)}>Annuler</button>
           </div>
