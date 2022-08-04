@@ -5,7 +5,6 @@ const fs = require('fs');
  */
 exports.createPost = (req, res) => {
   if (req.file) {
-    console.log(req.file);
     const post = new Post({
       ...req.body,
       user: req.auth.userId,
@@ -19,6 +18,7 @@ exports.createPost = (req, res) => {
         res.status(201).json({ message: 'Votre message a bien été envoyé.' })
       )
       .catch(error => {
+        // delete the image if message sending is not successful
         if (req.file) {
           const filename = post.imageUrl.split('/uploads/')[1];
           fs.unlink(`uploads/${filename}`, error => {
@@ -77,24 +77,32 @@ exports.editPost = async (req, res) => {
   Post.findOne({ _id: req.params.id })
     .then(post => {
       if (
-        req.auth.userRole === 'admin' ||
-        req.auth.userId === post.user.toString()
+        req.auth.userRole !== 'admin' &&
+        req.auth.userId !== post.user.toString()
       ) {
-        // allows user to remove image from the post
-        if (post.imageUrl && req.body.deleteFile === 'true') {
+        res.status(403).json({
+          message: "Vous n'êtes pas autorisé à effectuer cette requête.",
+        });
+      } else {
+        // the user wants to delete the old image without adding a new one
+        if (post.imageUrl && req.body.deleteFile === 'true' && !req.file) {
           const filename = post.imageUrl.split('/uploads/')[1];
           fs.unlink(`uploads/${filename}`, error => {
             if (error) console.error('ignored', error.message);
           });
+          post.message = req.body.message;
           post.imageUrl = undefined;
           post.save();
         }
-        // if old file + new file
-        if (post.imageUrl && req.file) {
-          const filename = post.imageUrl.split('/uploads/')[1];
-          fs.unlink(`uploads/${filename}`, error => {
-            if (error) console.error('ignored', error.message);
-          });
+        // the user sends an image
+        if (req.file) {
+          // delete the old image if it exists
+          if (post.imageUrl) {
+            const filename = post.imageUrl.split('/uploads/')[1];
+            fs.unlink(`uploads/${filename}`, error => {
+              if (error) console.error('ignored', error.message);
+            });
+          }
           Post.updateOne(
             { _id: req.params.id },
             {
@@ -109,30 +117,11 @@ exports.editPost = async (req, res) => {
             .then(() =>
               res
                 .status(200)
-                .json({ message: 'Votre message a été modifié. 1' })
-            )
-            .catch(error => res.status(400).json({ error }));
-        } else if (req.file) {
-          // if no old file but new file
-          Post.updateOne(
-            { _id: req.params.id },
-            {
-              $set: {
-                message: req.body.message,
-                imageUrl: `${req.protocol}://${req.get('host')}/uploads/${
-                  req.file.filename
-                }`,
-              },
-            }
-          )
-            .then(() =>
-              res
-                .status(200)
-                .json({ message: 'Votre message a été modifié. 2' })
+                .json({ message: 'Votre message a été mis à jour.' })
             )
             .catch(error => res.status(400).json({ error }));
         } else {
-          // if no old file and no new file
+          // the user edits a message without an image
           Post.updateOne(
             { _id: req.params.id },
             { $set: { message: req.body.message } }
@@ -140,14 +129,10 @@ exports.editPost = async (req, res) => {
             .then(() =>
               res
                 .status(200)
-                .json({ message: 'Votre message a été modifié. 3' })
+                .json({ message: 'Votre message a été mis à jour.' })
             )
             .catch(error => res.status(400).json({ error }));
         }
-      } else {
-        res.status(403).json({
-          message: "Vous n'êtes pas autorisé à effectuer cette requête.",
-        });
       }
     })
     .catch(error => res.status(500).json({ error }));

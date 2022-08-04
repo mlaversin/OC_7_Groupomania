@@ -46,6 +46,7 @@ export default function PostCard({ post, userId, handleRefresh }) {
         console.log(res.message);
       });
     setIsEditing(false);
+    setDeleteFile(false);
     setFileUpload(null);
   };
 
