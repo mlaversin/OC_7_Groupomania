@@ -15,7 +15,7 @@ The project is based on a MERN stack. MERN stands for MongoDB, Express, React an
 
 You will need to have Node and `npm` installed locally on your machine.
 
-- Clone this repo and navigate into the root folder.
+- Clone this repo and navigate into the root folder :
 
 ```shell
 git clone https://github.com/mlaversin/MorganLaversin_7_16062022.git
@@ -24,7 +24,7 @@ cd .\MorganLaversin_7_16062022\
 
 ### 1. Backend
 
-- From the root folder, navigate into the backend folder and run `npm install`.
+- From the root folder, navigate into the backend folder and install the dependencies :
 
 ```shell
 cd ./backend
@@ -37,7 +37,7 @@ npm install
 
 - You need to create an `uploads` folder in the backend root folder.
 
-- You can then run the server with
+- You can then run the server :
 
 ```shell
 npm start
@@ -45,14 +45,14 @@ npm start
 
 ### 2. Frontend
 
-- From the root folder, navigate into the frontend folder and run `npm install`.
+- From the root folder, navigate into the frontend folder and install the dependencies :
 
 ```shell
 cd ./frontend
 npm install
 ```
 
-- You can then run the server with
+- You can then run the server :
 
 ```shell
 npm start
