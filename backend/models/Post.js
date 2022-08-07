@@ -9,7 +9,8 @@ const postSchema = mongoose.Schema(
     message: {
       type: String,
       required: true,
-      minLength: [10, 'Message trop court !'],
+      minLength: [10, 'Votre message est trop court  (10 caractères minimum)'],
+      maxLength: [500, 'Votre message est trop court  (10 caractères minimum)'],
     },
     imageUrl: { type: String },
     likes: { type: Number, required: true, default: 0 },
