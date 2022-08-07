@@ -1,15 +1,17 @@
-## OC / Project 7
+# OC / Project 7
 
 This seventh and last project of my training program consists in building a full-stack solution for a corporate social network.
 
-### Built With
+## Built With
 
-- [![MongoDB][mongodb]{:target="\_blank"}][mongodb-url]
-- [![Express][express.js]][express-url]
+The project is based on a MERN stack. MERN stands for MongoDB, Express, React and Node.
+
+- [![MongoDB][mongodb]](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white){:target="\_blank"}
+- [![Express.js][express.js]][express-url]
 - [![React][react.js]][react-url]
-- [![Node][node.js]][node-url]
+- [![Node.js][node.js]][node-url]
 
-### Project installation
+## Project installation
 
 You will need to have Node and `npm` installed locally on your machine.
 
@@ -20,7 +22,7 @@ git clone https://github.com/mlaversin/MorganLaversin_7_16062022.git
 cd .\MorganLaversin_7_16062022\
 ```
 
-#### 1. Backend
+### 1. Backend
 
 - In the backend folder and run `npm install`.
 
@@ -41,7 +43,7 @@ npm install
 npm start
 ```
 
-#### 2. Frontend
+### 2. Frontend
 
 - In a frontend folder and run `npm install`.
 
