@@ -40,7 +40,7 @@ export default function LoginForm() {
           setUserInfo({
             id: res.userId,
             firstname: res.firstname,
-            lastname: res.firstname,
+            lastname: res.lastname,
             role: res.role,
           });
           navigate('/');

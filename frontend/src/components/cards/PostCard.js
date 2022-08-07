@@ -5,6 +5,7 @@ import LikeButton from '../buttons/LikeButton';
 import CommentButton from '../buttons/CommentButton';
 import CommentCard from './CommentCard';
 import CommentForm from '../forms/CommentForm';
+import defaultProfilePic from '../../assets/default-profile-picture.png';
 
 export default function PostCard({ post, userId, handleRefresh }) {
   const { userInfo } = useContext(UserContext);
@@ -69,6 +70,13 @@ export default function PostCard({ post, userId, handleRefresh }) {
   return (
     <article className='post-card'>
       <div className='post-card__header'>
+        <div className='post-card__picture'>
+          {post.user.pictureUrl ? (
+            <img src={post.user.pictureUrl} alt='' />
+          ) : (
+            <img src={defaultProfilePic} alt='' />
+          )}
+        </div>
         <p className='post-card__username'>
           {post.user.firstname + ' ' + post.user.lastname}
         </p>

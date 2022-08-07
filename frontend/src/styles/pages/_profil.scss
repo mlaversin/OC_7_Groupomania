@@ -22,3 +22,10 @@
   font-weight: bold;
   text-align: center;
 }
+
+.profile-pic {
+  border-radius: 50%;
+  object-fit: cover;
+  width: 10rem;
+  height: 10rem;
+}
