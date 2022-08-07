@@ -70,16 +70,18 @@ export default function PostCard({ post, userId, handleRefresh }) {
   return (
     <article className='post-card'>
       <div className='post-card__header'>
-        <div className='post-card__picture'>
-          {post.user.pictureUrl ? (
-            <img src={post.user.pictureUrl} alt='' />
-          ) : (
-            <img src={defaultProfilePic} alt='' />
-          )}
+        <div className='post-card__author'>
+          <div className='post-card__picture'>
+            {post.user.pictureUrl ? (
+              <img src={post.user.pictureUrl} alt='' />
+            ) : (
+              <img src={defaultProfilePic} alt='' />
+            )}
+          </div>
+          <p className='post-card__username'>
+            {post.user.firstname + ' ' + post.user.lastname}
+          </p>
         </div>
-        <p className='post-card__username'>
-          {post.user.firstname + ' ' + post.user.lastname}
-        </p>
         <p className='post-card__createdAt'>
           Posté le {Moment(post.createdAt).format('DD/MM/YY à hh:mm')}
         </p>

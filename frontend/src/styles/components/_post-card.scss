@@ -51,6 +51,16 @@
   margin-bottom: 3rem;
 }
 
+.post-card__picture img {
+  margin-right: 1rem;
+}
+
+.post-card__author {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .post-card__comment {
   display: flex;
 }
