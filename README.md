@@ -1,1 +1,68 @@
 ### OC / Project 7
+
+This seventh and last project of my training program consists in building a full-stack solution for a corporate social network.
+
+### Built With
+
+- [![MongoDB][mongodb]][mongodb-url]
+- [![Express][express.js]][express-url]
+- [![React][react.js]][react-url]
+- [![Node][node.js]][node-url]
+
+### Project installation
+
+You will need to have Node and `npm` installed locally on your machine.
+
+- Clone this repo and move in the root folder.
+
+```shell
+git clone https://github.com/mlaversin/MorganLaversin_7_16062022.git
+cd .\MorganLaversin_7_16062022\
+```
+
+1. Backend
+
+- In the backend folder and run `npm install`.
+
+```shell
+cd ./backend
+npm install
+```
+
+- You need to create a MongoDB database
+
+- You need to create an .env file following the instructions in `.env.example` file
+
+- You need to create an `uploads` folder in the backend root folder.
+
+- You can then run the server with
+
+```shell
+npm start
+```
+
+2. Frontend
+
+- In a frontend folder and run `npm install`.
+
+```shell
+cd ./frontend
+npm install
+```
+
+- You can then run the server with
+
+```shell
+npm start
+```
+
+<!-- MARKDOWN LINKS & IMAGES -->
+
+[mongodb]: https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white
+[express.js]: https://img.shields.io/badge/Express.js-404D59?style=for-the-badge
+[react.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[node.js]: https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white
+[mongodb-url]: https://www.mongodb.com/
+[express-url]: https://expressjs.com/
+[react-url]: https://reactjs.org/
+[node-url]: https://nodejs.org/en/
