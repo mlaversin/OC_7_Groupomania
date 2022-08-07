@@ -1,0 +1,24 @@
+.profile-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.field-container {
+  margin: 2rem 0;
+}
+
+.field-content {
+  padding: 0.5rem 0;
+  text-align: center;
+}
+
+.avatar-container {
+  width: 10rem;
+}
+
+.field-title {
+  font-weight: bold;
+  text-align: center;
+}
