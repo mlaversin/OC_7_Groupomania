@@ -1,10 +1,10 @@
-### OC / Project 7
+## OC / Project 7
 
 This seventh and last project of my training program consists in building a full-stack solution for a corporate social network.
 
 ### Built With
 
-- [![MongoDB][mongodb]][mongodb-url]
+- [![MongoDB][mongodb]{:target="\_blank"}][mongodb-url]
 - [![Express][express.js]][express-url]
 - [![React][react.js]][react-url]
 - [![Node][node.js]][node-url]
@@ -20,7 +20,7 @@ git clone https://github.com/mlaversin/MorganLaversin_7_16062022.git
 cd .\MorganLaversin_7_16062022\
 ```
 
-1. Backend
+#### 1. Backend
 
 - In the backend folder and run `npm install`.
 
@@ -41,7 +41,7 @@ npm install
 npm start
 ```
 
-2. Frontend
+#### 2. Frontend
 
 - In a frontend folder and run `npm install`.
 
