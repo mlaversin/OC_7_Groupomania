@@ -2,14 +2,19 @@
   height: 3.5rem;
   width: 100%;
   border-bottom: 1px solid #ddd;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   position: fixed;
   z-index: 100;
   top: 0;
   left: 0;
   background-color: #fff;
+}
+
+.header-container {
+  margin: 0 auto;
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .logo-gpm {
@@ -19,4 +24,8 @@
 .logout-btn {
   justify-self: right;
   margin-right: 2rem;
+}
+
+.header-nav ul {
+  display: flex;
 }

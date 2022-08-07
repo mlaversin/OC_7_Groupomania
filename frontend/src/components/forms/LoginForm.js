@@ -34,11 +34,13 @@ export default function LoginForm() {
       .then(res => {
         if (res.token) {
           localStorage.setItem('userId', JSON.stringify(res.userId));
+          localStorage.setItem('firstname', JSON.stringify(res.firstname));
+          localStorage.setItem('lastname', JSON.stringify(res.lastname));
           localStorage.setItem('token', JSON.stringify(res.token));
           setUserInfo({
             id: res.userId,
             firstname: res.firstname,
-            lastname: res.lastname,
+            lastname: res.firstname,
             role: res.role,
           });
           navigate('/');
@@ -76,9 +78,7 @@ export default function LoginForm() {
           <div>
             <button type='submit'>Connexion</button>
           </div>
-          <div className='error-message'>
-            {errorMessage}
-          </div>
+          <div className='error-message'>{errorMessage}</div>
         </Form>
       </Formik>
     </div>
