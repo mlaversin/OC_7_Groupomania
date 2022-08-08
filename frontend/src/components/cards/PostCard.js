@@ -7,8 +7,13 @@ import CommentCard from './CommentCard';
 import CommentForm from '../forms/CommentForm';
 import defaultProfilePic from '../../assets/default-profile-picture.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+import {
+  faArrowRotateLeft,
+  faPenToSquare,
+} from '@fortawesome/free-solid-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faImage } from '@fortawesome/free-solid-svg-icons';
+import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 
 export default function PostCard({ post, userId, handleRefresh }) {
   const { userInfo } = useContext(UserContext);
@@ -108,24 +113,58 @@ export default function PostCard({ post, userId, handleRefresh }) {
           </>
         )}
         {isEditing && (
-          <div>
+          <div className='edit-post-form'>
             <textarea
               defaultValue={message}
               onChange={e => setMessage(e.target.value)}
             />
-            <input
-              type='file'
-              accept='image/jpg, image/jpeg, image/png, image/gif'
-              onChange={e => setFileUpload(e.target.files[0])}
-            />
-            {post.imageUrl && (
-              <button onClick={() => setDeleteFile(true)}>
-                Supprimer l'image
+            <div className='edit-post-form-img'>
+              <div className='btn add-img-btn'>
+                <label htmlFor='image'>
+                  <FontAwesomeIcon icon={faImage} className='btn-icon' />
+                  Choisir une image
+                  <input
+                    type='file'
+                    id='image'
+                    name='image'
+                    accept='image/jpg, image/jpeg, image/png, image/gif'
+                    onChange={e => {
+                      setFileUpload(e.target.files[0]);
+                    }}
+                  />
+                </label>
+              </div>
+              {post.imageUrl && (
+                <>
+                  <button
+                    className='btn delete-img-btn'
+                    onClick={() => setDeleteFile(true)}
+                  >
+                    <FontAwesomeIcon icon={faTrash} className='btn-icon' />
+                    Supprimer l'image
+                  </button>
+                </>
+              )}
+            </div>
+            <div className='edit-post-form-footer'>
+              <button
+                className='btn btn-black'
+                onClick={() => setIsEditing(false)}
+              >
+                <FontAwesomeIcon
+                  icon={faArrowRotateLeft}
+                  className='btn-icon'
+                />
+                Annuler
               </button>
-            )}
-
-            <button onClick={() => handleEdit(post._id)}>Valider</button>
-            <button onClick={() => setIsEditing(false)}>Annuler</button>
+              <button
+                className='btn btn-primary'
+                onClick={() => handleEdit(post._id)}
+              >
+                <FontAwesomeIcon icon={faPaperPlane} className='btn-icon' />
+                Publier
+              </button>
+            </div>
           </div>
         )}
       </div>

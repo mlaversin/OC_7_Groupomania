@@ -63,8 +63,64 @@ textarea {
 }
 
 /*******************************
-  ******** COMMENT FORM ********
- ******************************/
+***** EDIT POST FORM ******
+******************************/
+
+.edit-post-form {
+  @include flex-col;
+  background-color: #eee;
+  border-radius: 0.5rem;
+}
+
+.edit-post-form textarea {
+  height: 4rem;
+  padding: 0.5rem;
+  margin: 1rem 0 0;
+  width: 95%;
+  border-radius: 0.5rem;
+  resize: none;
+  font-size: 16px;
+}
+
+.edit-post-form-img {
+  @include flex-row;
+  width: 100%;
+}
+
+.edit-post-form .add-img-btn {
+  width: 12rem;
+  font-size: 14px;
+  color: $clr-primary;
+  cursor: pointer;
+}
+
+.edit-post-form .add-img-btn label {
+  cursor: inherit;
+}
+
+.edit-post-form input[type='file'] {
+  display: none;
+}
+
+.edit-post-form .delete-img-btn {
+  font-size: 13px;
+  color: $clr-primary;
+}
+
+.edit-post-form-footer {
+  @include flex-row;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.edit-post-form-footer button {
+  font-size: 13px;
+  padding: 0.3rem 0.5rem;
+}
+
+/*******************************
+    ******** COMMENT FORM ********
+   ******************************/
 
 .comment-form {
   position: relative;
@@ -72,10 +128,13 @@ textarea {
 .comment-form textarea {
   height: 3rem;
   width: 100%;
+  margin-top: 0.6rem;
   padding: 0.5rem 3rem 0.5rem 1rem;
   border: 1px solid #eee;
   border-radius: 999px;
+  font-size: 16px;
   overflow: hidden;
+  resize: none;
 }
 .send-comment-btn {
   position: absolute;
