@@ -5,8 +5,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import { faMessage } from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
 
 export default function Header() {
+  const navigate = useNavigate();
+
+  const pathname = window.location.pathname;
+
   const userName = JSON.parse(localStorage.getItem('firstname'));
   const { setUserInfo } = useContext(UserContext);
 
@@ -27,19 +32,23 @@ export default function Header() {
         {userName && (
           <nav className='header-nav'>
             <ul>
-              <li>
-                <a href='/' className='btn'>
-                  <FontAwesomeIcon icon={faMessage} className='btn-icon' />
-                  Accueil
-                </a>
+              <li
+                onClick={() => navigate('/')}
+                className={`btn-icon ${pathname === '/' ? 'active' : null}`}
+              >
+                <FontAwesomeIcon icon={faMessage} className='btn-icon' />
+                Messages
               </li>
-              <li>
-                <a href='/profil' className='btn btn-black'>
-                  <FontAwesomeIcon icon={faUser} className='btn-icon' />
-                  {userName}
-                </a>
+              <li
+                onClick={() => navigate('/profil')}
+                className={`btn-icon ${
+                  pathname === '/profil' ? 'active' : null
+                }`}
+              >
+                <FontAwesomeIcon icon={faUser} className='btn-icon' />
+                {userName}
               </li>
-              <li onClick={handleLogout}>
+              <li onClick={() => handleLogout()}>
                 <a href='/auth' className='btn'>
                   <FontAwesomeIcon
                     icon={faRightFromBracket}

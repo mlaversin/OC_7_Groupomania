@@ -1,6 +1,9 @@
 import { useState, useContext } from 'react';
 import { UserContext } from '../../contexts/UserContext';
 import { sendPost } from '../../actions/sendPost';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faImage } from '@fortawesome/free-solid-svg-icons';
+import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 
 export default function PostForm({ handleRefresh }) {
   const { userInfo } = useContext(UserContext);
@@ -68,12 +71,8 @@ export default function PostForm({ handleRefresh }) {
 
   return (
     <div className='form post-form'>
-      <form
-        onSubmit={e => {
-          handleSubmit(e);
-        }}
-      >
-        <div>
+      <form onSubmit={e => handleSubmit(e)}>
+        <div className='post-form__body'>
           <textarea
             placeholder={`Quoi de neuf, ${userInfo.firstname} ?`}
             id='message'
@@ -83,24 +82,33 @@ export default function PostForm({ handleRefresh }) {
           />
           <div className='error-message'>{errorMessage}</div>
         </div>
-        <div>
-          <input
-            type='file'
-            id='image'
-            name='image'
-            accept='image/jpg, image/jpeg, image/png, image/gif'
-            onChange={e => {
-              setFileUpload(e.target.files[0]);
-              handleFileValidation(e.target.files[0]);
-            }}
-          />
-          <div className='error-message'>{errorFileUpload}</div>
+        <div className='post-form__footer'>
+          <div className='image-buttons'>
+            <div className='btn add-image-btn'>
+              <label htmlFor='image'>
+                <FontAwesomeIcon icon={faImage} className='btn-icon' />
+                Choisir une image
+                <input
+                  type='file'
+                  id='image'
+                  name='image'
+                  accept='image/jpg, image/jpeg, image/png, image/gif'
+                  onChange={e => {
+                    setFileUpload(e.target.files[0]);
+                    handleFileValidation(e.target.files[0]);
+                  }}
+                />
+              </label>
+            </div>
+          </div>
+          <div className='send-btn'>
+            <button className='btn btn-primary' type='submit'>
+              <FontAwesomeIcon icon={faPaperPlane} className='btn-icon' />
+              Publier
+            </button>
+          </div>
         </div>
-        <div>
-          <button className='post-btn' type='submit'>
-            Publier
-          </button>
-        </div>
+        <div className='error-message'>{errorFileUpload}</div>
       </form>
     </div>
   );

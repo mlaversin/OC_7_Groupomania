@@ -1,0 +1,40 @@
+label {
+  font-weight: $fw-bold;
+}
+input,
+textarea {
+  background-color: #fff;
+}
+
+.error-message {
+  height: 1rem;
+  font-size: $fs-300;
+  color: rgb(189, 24, 24);
+}
+
+// post form
+.post-form {
+  margin-top: 3rem;
+
+  &__footer {
+    @include flex-row;
+    justify-content: space-between;
+
+    & .image-buttons {
+    }
+  }
+}
+.post-form input[type='file'] {
+  display: none;
+}
+
+.add-image-btn {
+  width: 11rem;
+  font-size: $fs-300;
+  border-radius: 0rem;
+  cursor: pointer;
+  color: $clr-primary;
+}
+.add-image-btn label {
+  cursor: inherit;
+}
