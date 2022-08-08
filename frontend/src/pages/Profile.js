@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Layout from '../components/layout/Layout';
 import defaultProfilePic from '../assets/default-profile-picture.png';
 
 export default function Profile() {
@@ -57,64 +58,70 @@ export default function Profile() {
 
   return (
     <>
-      <main className='profile-page'>
-        <h1>Mon profil utilisateur</h1>
-        <div className='field-container'>
-          <div className='picture-container'>
-            <div className='field-title'>Ma photo de profil</div>
-            {isEditingPic === false && (
-              <>
-                {user && user.pictureUrl ? (
-                  <img
-                    src={user.pictureUrl}
-                    className='profile-pic'
-                    alt='utilisateur'
-                  />
-                ) : (
-                  <img
-                    src={defaultProfilePic}
-                    className='profile-pic'
-                    alt='utilisateur'
-                  />
-                )}
+      <Layout>
+        <main className='profile-page'>
+          <h1>Mon profil utilisateur</h1>
+          <div className='field-container'>
+            <div className='picture-container'>
+              <div className='field-title'>Ma photo de profil</div>
+              {isEditingPic === false && (
+                <>
+                  {user && user.pictureUrl ? (
+                    <img
+                      src={user.pictureUrl}
+                      className='profile-pic'
+                      alt='utilisateur'
+                    />
+                  ) : (
+                    <img
+                      src={defaultProfilePic}
+                      className='profile-pic'
+                      alt='utilisateur'
+                    />
+                  )}
 
-                <button onClick={() => setIsEditingPic(true)}>Editer</button>
-              </>
-            )}
-            {isEditingPic && (
-              <>
-                <input
-                  type='file'
-                  accept='image/jpg, image/jpeg, image/png'
-                  onChange={e => setFileUpload(e.target.files[0])}
-                />
-                {user.pictureUrl && (
-                  <button onClick={() => setDeleteFile(true)}>
-                    Supprimer l'image
+                  <button onClick={() => setIsEditingPic(true)}>Editer</button>
+                </>
+              )}
+              {isEditingPic && (
+                <>
+                  <input
+                    type='file'
+                    accept='image/jpg, image/jpeg, image/png'
+                    onChange={e => setFileUpload(e.target.files[0])}
+                  />
+                  {user.pictureUrl && (
+                    <button onClick={() => setDeleteFile(true)}>
+                      Supprimer l'image
+                    </button>
+                  )}
+
+                  <button onClick={() => handleEditPic(user._id)}>
+                    Valider
                   </button>
-                )}
-
-                <button onClick={() => handleEditPic(user._id)}>Valider</button>
-                <button onClick={() => setIsEditingPic(false)}>Annuler</button>
-              </>
-            )}
+                  <button onClick={() => setIsEditingPic(false)}>
+                    Annuler
+                  </button>
+                </>
+              )}
+            </div>
           </div>
-        </div>
-        <div className='info-container'>
-          <div className='field-container'>
-            <div className='field-title'>Mon addresse email</div>
-            <div className='field-content'>{user ? user.email : ''}</div>
+          <div className='info-container'>
+            <div className='field-container'>
+              <div className='field-title'>Mon addresse email</div>
+              <div className='field-content'>{user ? user.email : ''}</div>
+            </div>
+            <div className='field-container'>
+              <div className='field-title'>Mon prénom</div>
+              <div className='field-content'>{user ? user.firstname : ''}</div>
+            </div>
+            <div className='field-container'>
+              <div className='field-title'>Mon nom</div>
+              <div className='field-content'>{user ? user.lastname : ''}</div>
+            </div>
           </div>
-          <div className='field-container'>
-            <div className='field-title'>Mon prénom</div>
-            <div className='field-content'>{user ? user.firstname : ''}</div>
-          </div>
-          <div className='field-container'>
-            <div className='field-title'>Mon nom</div>
-            <div className='field-content'>{user ? user.lastname : ''}</div>
-          </div>
-        </div>
-      </main>
+        </main>
+      </Layout>
     </>
   );
 }

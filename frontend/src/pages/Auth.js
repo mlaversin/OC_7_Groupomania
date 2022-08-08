@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import LoginForm from '../components/forms/LoginForm';
 import SignUpForm from '../components/forms/SignUpForm';
+import Footer from '../components/layout/Footer';
+import logo from '../assets/logo-gpm.png';
 
 export default function Auth() {
   const [loginForm, setLoginForm] = useState(true);
@@ -19,31 +21,45 @@ export default function Auth() {
   return (
     <>
       <main className='authentication-page'>
-        <div className='auth-container'>
-          <div className='auth-container__header'>
-            <ul>
-              <li
-                id='login'
-                className={`login-tab ${loginForm ? 'active' : null}`}
-                onClick={handleForms}
-              >
-                Se connecter
-              </li>
-              <li
-                id='signup'
-                className={`signup-tab ${signUpForm ? 'active' : null}`}
-                onClick={handleForms}
-              >
-                S'inscrire
-              </li>
-            </ul>
+        <header className='auth-header'>
+          <div className='auth-header-container'>
+            <div className='header-logo'>
+              <a href='/auth'>
+                <img
+                  src={logo}
+                  alt='Accueil Groupomania'
+                  className='auth-logo-gpm'
+                />
+              </a>
+            </div>
+            <div className='header-nav'>
+              <ul>
+                <li
+                  id='login'
+                  className={`login-tab ${loginForm ? 'active' : null}`}
+                  onClick={handleForms}
+                >
+                  Se connecter
+                </li>
+                <li
+                  id='signup'
+                  className={`signup-tab ${signUpForm ? 'active' : null}`}
+                  onClick={handleForms}
+                >
+                  S'inscrire
+                </li>
+              </ul>
+            </div>
           </div>
-          <div className='auth-container__body'>
+        </header>
+        <div className='auth-modal'>
+          <div className='auth-modal-container'>
             {loginForm && <LoginForm />}
             {signUpForm && <SignUpForm />}
           </div>
         </div>
       </main>
+      <Footer />
     </>
   );
 }

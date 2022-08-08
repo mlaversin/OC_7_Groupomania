@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../contexts/UserContext';
 import { useNavigate } from 'react-router-dom';
+import Layout from '../components/layout/Layout';
 import PostForm from '../components/forms/PostForm';
 import PostCard from '../components/cards/PostCard';
 
@@ -84,20 +85,22 @@ export default function Home() {
 
   return (
     <>
-      <main className='homepage'>
-        <h1>Page d'accueil</h1>
-        <PostForm handleRefresh={handleRefresh} />
-        <div className='posts-container'>
-          {posts.map(post => (
-            <PostCard
-              key={post._id}
-              post={post}
-              userId={userId}
-              handleRefresh={handleRefresh}
-            />
-          ))}
-        </div>
-      </main>
+      <Layout>
+        <main className='homepage'>
+          <h1>Page d'accueil</h1>
+          <PostForm handleRefresh={handleRefresh} />
+          <div className='posts-container'>
+            {posts.map(post => (
+              <PostCard
+                key={post._id}
+                post={post}
+                userId={userId}
+                handleRefresh={handleRefresh}
+              />
+            ))}
+          </div>
+        </main>
+      </Layout>
     </>
   );
 }

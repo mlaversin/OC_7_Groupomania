@@ -54,33 +54,32 @@ export default function LoginForm() {
   };
 
   return (
-    <div className='form login-form'>
+    <>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={values => handleSubmit(values)}
       >
-        <Form>
-          <div>
-            <label htmlFor='email'>Email</label>
-            <Field type='email' id='email' name='email' />
-            <div className='error-message'>
-              <ErrorMessage name='email' />
-            </div>
+        <Form className='form login-form'>
+          <label htmlFor='email'>Email</label>
+          <Field type='email' id='email' name='email' />
+          <div className='error-message'>
+            <ErrorMessage name='email' />
           </div>
-          <div>
-            <label htmlFor='password'>Mot de passe</label>
-            <Field type='password' id='password' name='password' />
-            <div className='error-message'>
-              <ErrorMessage name='password' />
-            </div>
+
+          <label htmlFor='password'>Mot de passe</label>
+          <Field type='password' id='password' name='password' />
+          <div className='error-message'>
+            <ErrorMessage name='password' />
           </div>
-          <div>
-            <button type='submit'>Connexion</button>
-          </div>
+
+          <button type='submit' className='btn btn-primary'>
+            Connexion
+          </button>
+
           <div className='error-message'>{errorMessage}</div>
         </Form>
       </Formik>
-    </div>
+    </>
   );
 }

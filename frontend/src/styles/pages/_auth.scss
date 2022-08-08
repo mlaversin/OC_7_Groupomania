@@ -3,53 +3,80 @@
   height: 100vh;
 }
 
-.auth-container {
-  width: 50%;
+.auth-header {
+  height: 3.5rem;
+  width: 100%;
+  border-bottom: 1px solid #ddd;
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  background-color: #fff;
+}
+
+.auth-header-container {
+  height: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.auth-logo-gpm {
+  width: 15rem;
+}
+
+.header-nav li {
+  padding: 0.6rem 1.4rem;
+  border-radius: 1rem;
+  font-weight: $fw-bold;
+  cursor: pointer;
+}
+.header-nav li.active {
+  background-color: $clr-secondary;
+}
+
+.auth-modal {
+  padding: 3rem 0;
+  width: 30rem;
   max-width: 30rem;
+  border-radius: 2rem;
+  background-color: $clr-secondary-light;
+}
 
-  &__header {
-    ul {
-      @include flex-row;
-    }
-
-    li {
-      width: 50%;
-      padding: 1rem;
-      background-color: $clr-secondary;
-      text-align: center;
-      cursor: pointer;
-    }
-    li.active {
-      background-color: $clr-primary;
-    }
-    li.login-tab {
-      border-top-left-radius: 1.5rem;
-    }
-    li.signup-tab {
-      border-top-right-radius: 1.5rem;
-    }
-  }
-
-  &__body {
-    @include flex-col;
-    height: 20rem;
-    border: 1px solid #ccc;
-  }
+.auth-modal-container {
+  @include flex-col;
+  margin: 0 auto;
+  height: 100%;
 }
 
 .login-form,
 .signup-form {
-  margin: 3rem;
-}
-
-.form-title {
-  padding-bottom: 1.5rem;
+  @include flex-col;
+  width: 75%;
+  height: 100%;
 }
 
 input {
-  margin-bottom: 0.6rem;
+  margin: 0.5rem 0;
+  height: 2rem;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 1rem;
+  text-align: center;
+}
+
+input:focus {
+  border: 1px solid black;
 }
 
 label {
   display: block;
+}
+
+.password-info {
+  padding-top: 0.4rem;
+  font-size: $fs-200;
+  font-style: italic;
 }

@@ -1,13 +1,18 @@
-button {
-  cursor: pointer;
-  padding: 0.3rem 0.5rem;
-}
-
 .btn {
   cursor: pointer;
-  padding: 0.3rem 1rem;
-  margin: 0 0.5rem;
+  padding: 0.5rem 1rem;
+  margin: 0.5rem;
   border-radius: 9999px;
+  font-weight: $fw-bold;
+  font-size: $fs-400;
+}
+
+.btn-primary {
+  background-color: $clr-primary;
+  color: white;
+}
+.btn-primary:hover {
+  background-color: $clr-primary-light;
 }
 
 .btn-secondary {

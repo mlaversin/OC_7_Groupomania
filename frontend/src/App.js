@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import { UserContext } from './contexts/UserContext';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Header from './components/layout/Header';
-import Footer from './components/layout/Footer';
 import Home from './pages/Home';
 import Auth from './pages/Auth';
 import Profile from './pages/Profile';
@@ -20,14 +18,12 @@ export default function App() {
     <div className='app-container'>
       <UserContext.Provider value={{ userInfo, setUserInfo }}>
         <BrowserRouter>
-          <Header />
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='auth' element={<Auth />} />
             <Route path='profil' element={<Profile />} />
             <Route path='*' element={<NotFound />} />
           </Routes>
-          <Footer />
         </BrowserRouter>
       </UserContext.Provider>
     </div>
