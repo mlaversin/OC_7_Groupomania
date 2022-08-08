@@ -1,46 +1,8 @@
 .homepage {
+  width: 50%;
+  max-width: 700px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.post-form {
-  width: 60vw;
-  padding: 1rem;
-  margin-bottom: 2rem;
-  background-color: rgb(241, 241, 241);
-  border-radius: 1rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.post-form textarea {
-  width: 55vw;
-  height: 6rem;
-  margin-top: 0.6rem;
-  border: none;
-  resize: none;
-  padding: 0.5rem;
-  border-radius: 0.5rem;
-  font-size: 16px;
-}
-
-.post-card textarea {
-  width: 55vw;
-  height: 6rem;
-  margin-top: 0.6rem;
-  resize: none;
-  padding: 0.5rem;
-  border-radius: 0.5rem;
-  font-size: 16px;
-}
-
-.post-form button {
-  float: right;
-}
-
-.comment-form textarea {
-  height: 3rem;
-  border: 1px solid #eee;
 }

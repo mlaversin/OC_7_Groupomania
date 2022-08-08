@@ -18,7 +18,7 @@
   &__createdAt {
     margin: 1rem 0;
     font-style: italic;
-    color: grey;
+    color: $clr-tertiary-light;
     font-size: 14px;
   }
 
@@ -29,4 +29,14 @@
 
 .comment-counter {
   margin-left: 1rem;
+}
+
+.send-comment-btn {
+  width: 2rem;
+  height: 2rem;
+  @include flex-col;
+}
+.send-comment-btn .btn-icon {
+  padding: 0;
+  font-size: 18px;
 }

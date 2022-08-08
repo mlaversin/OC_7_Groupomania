@@ -15,7 +15,6 @@ export default function CommentCard({ post, comment, userId, handleRefresh }) {
   const handleEdit = id => {
     const token = JSON.parse(localStorage.getItem('token'));
     const data = { commentId: id, comment: editComment };
-    console.log(data);
     fetch(
       `${process.env.REACT_APP_API_URL}/api/post/comment/${post._id}/edit`,
       {
@@ -66,7 +65,7 @@ export default function CommentCard({ post, comment, userId, handleRefresh }) {
       </div>
       <div className='comment-card-body'>
         {isEditing === false && (
-            <p className='comment-card__comment'>{comment.comment}</p>
+          <p className='comment-card__comment'>{comment.comment}</p>
         )}
         {isEditing && (
           <div>

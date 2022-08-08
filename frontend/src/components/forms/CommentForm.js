@@ -2,6 +2,8 @@ import { useState, useContext } from 'react';
 import { UserContext } from '../../contexts/UserContext';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 
 export default function CommentForm({ post, handleRefresh }) {
   const { userInfo } = useContext(UserContext);
@@ -59,24 +61,19 @@ export default function CommentForm({ post, handleRefresh }) {
           resetForm();
         }}
       >
-        <Form>
-          <div>
-            {/* <label htmlFor='comment'>Votre commentaire</label> */}
-            <Field
-              as='textarea'
-              placeholder={`Ajouter un commentaire...`}
-              id='comment'
-              name='comment'
-            />
-            <div className='error-message'>
-              <ErrorMessage name='message' />
-            </div>
+        <Form className='form comment-form'>
+          <Field
+            as='textarea'
+            placeholder={`Ajouter un commentaire...`}
+            id='comment'
+            name='comment'
+          />
+          <div className='error-message'>
+            <ErrorMessage name='message' />
           </div>
-          <div>
-            <button className='post-btn' type='submit'>
-              Commenter
-            </button>
-          </div>
+          <button className='btn btn-primary send-comment-btn' type='submit'>
+            <FontAwesomeIcon icon={faPaperPlane} className='btn-icon' />
+          </button>
           <div className='error-message'>
             {errorMessage ? errorMessage : ''}
           </div>

@@ -70,46 +70,44 @@ export default function PostForm({ handleRefresh }) {
   };
 
   return (
-    <div className='form post-form'>
-      <form onSubmit={e => handleSubmit(e)}>
-        <div className='post-form__body'>
-          <textarea
-            placeholder={`Quoi de neuf, ${userInfo.firstname} ?`}
-            id='message'
-            name='message'
-            onChange={e => setMessage(e.target.value)}
-            onBlur={() => handleMessageValidation()}
-          />
-          <div className='error-message'>{errorMessage}</div>
-        </div>
-        <div className='post-form__footer'>
-          <div className='image-buttons'>
-            <div className='btn add-image-btn'>
-              <label htmlFor='image'>
-                <FontAwesomeIcon icon={faImage} className='btn-icon' />
-                Choisir une image
-                <input
-                  type='file'
-                  id='image'
-                  name='image'
-                  accept='image/jpg, image/jpeg, image/png, image/gif'
-                  onChange={e => {
-                    setFileUpload(e.target.files[0]);
-                    handleFileValidation(e.target.files[0]);
-                  }}
-                />
-              </label>
-            </div>
-          </div>
-          <div className='send-btn'>
-            <button className='btn btn-primary' type='submit'>
-              <FontAwesomeIcon icon={faPaperPlane} className='btn-icon' />
-              Publier
-            </button>
+    <form className='form post-form' onSubmit={e => handleSubmit(e)}>
+      <div className='post-form__body'>
+        <textarea
+          placeholder={`Quoi de neuf, ${userInfo.firstname} ?`}
+          id='message'
+          name='message'
+          onChange={e => setMessage(e.target.value)}
+          onBlur={() => handleMessageValidation()}
+        />
+        <div className='error-message'>{errorMessage}</div>
+      </div>
+      <div className='post-form__footer'>
+        <div className='image-buttons'>
+          <div className='btn add-image-btn'>
+            <label htmlFor='image'>
+              <FontAwesomeIcon icon={faImage} className='btn-icon' />
+              Choisir une image
+              <input
+                type='file'
+                id='image'
+                name='image'
+                accept='image/jpg, image/jpeg, image/png, image/gif'
+                onChange={e => {
+                  setFileUpload(e.target.files[0]);
+                  handleFileValidation(e.target.files[0]);
+                }}
+              />
+            </label>
           </div>
         </div>
-        <div className='error-message'>{errorFileUpload}</div>
-      </form>
-    </div>
+        <div className='send-btn'>
+          <button className='btn btn-primary' type='submit'>
+            <FontAwesomeIcon icon={faPaperPlane} className='btn-icon' />
+            Publier
+          </button>
+        </div>
+      </div>
+      <div className='error-message'>{errorFileUpload}</div>
+    </form>
   );
 }
