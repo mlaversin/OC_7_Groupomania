@@ -1,6 +1,10 @@
 import { useState, useContext } from 'react';
 import { UserContext } from '../../contexts/UserContext';
 import Moment from 'moment';
+import defaultProfilePic from '../../assets/default-profile-picture.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 export default function CommentCard({ post, comment, userId, handleRefresh }) {
   const { userInfo } = useContext(UserContext);
@@ -56,14 +60,19 @@ export default function CommentCard({ post, comment, userId, handleRefresh }) {
   return (
     <div className='comment-card'>
       <div className='comment-card__header'>
-        <p className='comment-card__username'>
-          {comment.firstname + ' ' + comment.lastname}
-        </p>
+        <div className='comment-card__author'>
+          <div className='comment-card__picture'>
+            <img src={defaultProfilePic} alt='' />
+          </div>
+          <p className='comment-card__username'>
+            {comment.firstname + ' ' + comment.lastname}
+          </p>
+        </div>
         <p className='comment-card__createdAt'>
           Posté le {Moment(comment.timestamp).format('DD/MM/YY à hh:mm')}
         </p>
       </div>
-      <div className='comment-card-body'>
+      <div className='comment-card__body'>
         {isEditing === false && (
           <p className='comment-card__comment'>{comment.comment}</p>
         )}
@@ -77,16 +86,18 @@ export default function CommentCard({ post, comment, userId, handleRefresh }) {
             <button onClick={() => setIsEditing(false)}>Annuler</button>
           </div>
         )}
-      </div>
-      <div className='edit-delete-buttons'>
-        {isAuthorized && (
-          <div>
-            <button onClick={() => setIsEditing(true)}>Editer</button>
-            <button className='delete-btn' onClick={handleDelete}>
-              Supprimer
-            </button>
-          </div>
-        )}
+        <div className='edit-delete-buttons'>
+          {isAuthorized && (
+            <div>
+              <button onClick={() => setIsEditing(true)}>
+                <FontAwesomeIcon icon={faPenToSquare} className='btn-icon' />
+              </button>
+              <button className='delete-btn' onClick={handleDelete}>
+                <FontAwesomeIcon icon={faTrash} className='btn-icon' />
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

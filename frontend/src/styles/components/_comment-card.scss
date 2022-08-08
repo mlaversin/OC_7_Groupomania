@@ -11,8 +11,20 @@
     align-items: center;
   }
 
+  &__author {
+    @include flex-row;
+  }
+
+  &__picture img {
+    border-radius: 9999px;
+    object-fit: cover;
+    width: 2rem;
+    height: 2rem;
+  }
+
   &__username {
     font-weight: bold;
+    margin-left: 1rem;
   }
 
   &__createdAt {
@@ -22,8 +34,14 @@
     font-size: 14px;
   }
 
+  &__body {
+    position: relative;
+  }
+
   &__comment {
-    padding-bottom: 1rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    width: 85%;
   }
 }
 
@@ -39,4 +57,11 @@
 .send-comment-btn .btn-icon {
   padding: 0;
   font-size: 18px;
+}
+
+.comment-card .edit-delete-buttons {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 10;
 }

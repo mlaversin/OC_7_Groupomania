@@ -1,11 +1,11 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faComment } from '@fortawesome/free-solid-svg-icons';
+import { faMessage } from '@fortawesome/free-solid-svg-icons';
 
-export default function CommentButton({commentsNumber}) {
+export default function CommentButton({ commentsNumber }) {
   return (
     <div className='post-card__comment'>
-      <FontAwesomeIcon icon={faComment} />
+      <FontAwesomeIcon icon={faMessage} />
       <div className='comment-counter'>{commentsNumber}</div>
     </div>
   );
