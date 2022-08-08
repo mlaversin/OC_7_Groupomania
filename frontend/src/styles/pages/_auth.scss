@@ -1,38 +1,41 @@
 .authentication-page {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  @include flex-col;
+  height: 100vh;
 }
 
 .auth-container {
   width: 50%;
   max-width: 30rem;
-  
 
   &__header {
-
     ul {
-      display: flex;
+      @include flex-row;
     }
 
     li {
       width: 50%;
       padding: 1rem;
+      background-color: $clr-secondary;
       text-align: center;
       cursor: pointer;
-      border: 1px solid #ccc;
+    }
+    li.active {
+      background-color: $clr-primary;
+    }
+    li.login-tab {
+      border-top-left-radius: 1.5rem;
+    }
+    li.signup-tab {
+      border-top-right-radius: 1.5rem;
     }
   }
 
   &__body {
-    display: flex;
-    justify-content: center;
+    @include flex-col;
+    height: 20rem;
     border: 1px solid #ccc;
   }
 }
-
-
 
 .login-form,
 .signup-form {

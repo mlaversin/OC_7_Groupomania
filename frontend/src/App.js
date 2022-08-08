@@ -19,16 +19,16 @@ export default function App() {
   return (
     <div className='app-container'>
       <UserContext.Provider value={{ userInfo, setUserInfo }}>
-        <Header />
         <BrowserRouter>
+          <Header />
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='auth' element={<Auth />} />
             <Route path='profil' element={<Profile />} />
             <Route path='*' element={<NotFound />} />
           </Routes>
+          <Footer />
         </BrowserRouter>
-        <Footer />
       </UserContext.Provider>
     </div>
   );

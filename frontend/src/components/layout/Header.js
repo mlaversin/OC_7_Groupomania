@@ -24,11 +24,21 @@ export default function Header() {
             <img src={logo} alt='Accueil Groupomania' className='logo-gpm' />
           </a>
         </div>
+        {userName === null && (
+          <>
+            <nav className='header-nav'>
+              <ul>
+                <li>Se connecter</li>
+                <li>S'inscrire</li>
+              </ul>
+            </nav>
+          </>
+        )}
         {userName && (
           <nav className='header-nav'>
             <ul>
               <li>
-                <a href='/' className='btn btn-secondary'>
+                <a href='/' className='btn'>
                   <FontAwesomeIcon icon={faMessage} className='btn-icon' />
                   Accueil
                 </a>

@@ -19,14 +19,21 @@ export default function Auth() {
   return (
     <>
       <main className='authentication-page'>
-        <h1>Page d'authentification</h1>
         <div className='auth-container'>
           <div className='auth-container__header'>
             <ul>
-              <li id='login' onClick={handleForms}>
+              <li
+                id='login'
+                className={`login-tab ${loginForm ? 'active' : null}`}
+                onClick={handleForms}
+              >
                 Se connecter
               </li>
-              <li id='signup' onClick={handleForms}>
+              <li
+                id='signup'
+                className={`signup-tab ${signUpForm ? 'active' : null}`}
+                onClick={handleForms}
+              >
                 S'inscrire
               </li>
             </ul>
