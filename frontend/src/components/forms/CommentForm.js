@@ -27,7 +27,6 @@ export default function CommentForm({ post, handleRefresh }) {
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = values => {
-    console.log(values);
     fetch(`${process.env.REACT_APP_API_URL}/api/post/comment/${post._id}`, {
       method: 'put',
       headers: {

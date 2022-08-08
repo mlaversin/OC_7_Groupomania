@@ -42,11 +42,15 @@
 
   &__footer {
     padding: 1.5rem 0;
-    display: flex;
-    justify-content: space-between;
+    @include flex-row;
+    justify-content: space-around;
 
     .like-counter {
       padding-left: 1rem;
+    }
+
+    .toggle-comments {
+      cursor: pointer;
     }
   }
 }
@@ -68,23 +72,12 @@
   cursor: pointer;
 }
 
-.post-card__author {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .post-card__comment {
   display: flex;
 }
 
 .updatePost {
   width: 30rem;
-}
-
-.edit-delete-buttons {
-  flex-basis: 30%;
-  align-self: flex-end;
 }
 
 .post-card textarea {

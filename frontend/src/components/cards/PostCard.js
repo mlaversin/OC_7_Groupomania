@@ -6,6 +6,9 @@ import CommentButton from '../buttons/CommentButton';
 import CommentCard from './CommentCard';
 import CommentForm from '../forms/CommentForm';
 import defaultProfilePic from '../../assets/default-profile-picture.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 export default function PostCard({ post, userId, handleRefresh }) {
   const { userInfo } = useContext(UserContext);
@@ -21,6 +24,7 @@ export default function PostCard({ post, userId, handleRefresh }) {
   const [deleteFile, setDeleteFile] = useState(false);
 
   const [comments, setComments] = useState([]);
+  const [showComments, setShowComments] = useState(false);
 
   useEffect(() => {
     setComments(post.comments);
@@ -127,29 +131,41 @@ export default function PostCard({ post, userId, handleRefresh }) {
       </div>
       <div className='post-card__footer'>
         <LikeButton post={post} userId={userId} handleRefresh={handleRefresh} />
-        <CommentButton commentsNumber={comments.length} />
-        <div className='edit-delete-buttons'>
-          {isAuthorized && isEditing === false && (
+        <div
+          className='toggle-comments'
+          onClick={() => setShowComments(!showComments)}
+        >
+          <CommentButton commentsNumber={comments.length} />
+        </div>
+
+        {isAuthorized && isEditing === false && (
+          <div className='edit-delete-buttons'>
             <div>
-              <button onClick={() => setIsEditing(true)}>Editer</button>
+              <button onClick={() => setIsEditing(true)}>
+                <FontAwesomeIcon icon={faPenToSquare} className='btn-icon' />
+              </button>
               <button className='delete-btn' onClick={handleDelete}>
-                Supprimer
+                <FontAwesomeIcon icon={faTrash} className='btn-icon' />
               </button>
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
       <div className='comments'>
         <CommentForm post={post} handleRefresh={handleRefresh} />
-        {comments.map(comment => (
-          <CommentCard
-            key={comment._id}
-            comment={comment}
-            userId={userId}
-            post={post}
-            handleRefresh={handleRefresh}
-          />
-        ))}
+        {showComments && (
+          <div className='comments-container'>
+            {comments.map(comment => (
+              <CommentCard
+                key={comment._id}
+                comment={comment}
+                userId={userId}
+                post={post}
+                handleRefresh={handleRefresh}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </article>
   );
