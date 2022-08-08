@@ -1,0 +1,31 @@
+// Color
+$clr-primary: #fd2d01;
+$clr-secondary: #ffd7d7;
+$clr-tertiary: #4e5166;
+
+$clr-primary-light: lighten($clr-primary, 3%);
+$clr-secondary-light: lighten($clr-secondary, 3%);
+$clr-tertiary-light: lighten($clr-tertiary, 4%);
+
+$clr-tertiary-dark: darken($clr-tertiary, 36%);
+
+// Font size
+$fs-900: 1.875rem;
+$fs-800: 1.75rem;
+$fs-700: 1.5rem;
+$fs-600: 1.25rem;
+$fs-500: 1.125rem;
+$fs-400: 1rem;
+$fs-300: 0.938rem;
+$fs-200: 0.875rem;
+
+// Font weight
+$fw-light: 300;
+$fw-regular: 400;
+$fw-bold: 700;
+
+// Breakpoints
+$mobilelg: 576;
+$tablet: 768;
+$desktop: 1024;
+$desktoplg: 1440;

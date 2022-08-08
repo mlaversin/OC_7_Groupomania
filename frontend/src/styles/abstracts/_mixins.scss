@@ -1,0 +1,53 @@
+@mixin flex-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin mq($size) {
+  @if ($size == mobilelg) {
+    @media screen and (min-width: #{$mobilelg}px) {
+      @content;
+    }
+  }
+  @if ($size == tablet) {
+    @media screen and (min-width: #{$tablet}px) {
+      @content;
+    }
+  }
+  @if ($size == desktop) {
+    @media screen and (min-width: #{$desktop}px) {
+      @content;
+    }
+  }
+  @if ($size == desktoplg) {
+    @media screen and (min-width: #{$desktoplg}px) {
+      @content;
+    }
+  }
+}
+
+@mixin box-shadow(
+  $top: 0px,
+  $left: 3px,
+  $blur: 6px,
+  $spread: 0px,
+  $color: #ccc
+) {
+  -webkit-box-shadow: $top $left $blur $spread $color;
+  -moz-box-shadow: $top $left $blur $spread $color;
+  box-shadow: $top $left $blur $spread $color;
+}
+
+@mixin word-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
