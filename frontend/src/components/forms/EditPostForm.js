@@ -7,6 +7,10 @@ import {
   faPaperPlane,
 } from '@fortawesome/free-solid-svg-icons';
 
+/*
+ * This component is the comment edit form which is displayed
+ * on PostCard component.
+ */
 export default function EditPostForm({
   post,
   message,
