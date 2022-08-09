@@ -1,49 +1,24 @@
 import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import { addLike } from '../../actions/addLike';
+import { removeLike } from '../../actions/removeLike';
 
 export default function LikeButton({ post, userId, handleRefresh }) {
   const [likedPost, setLikedPost] = useState(false);
 
-  const addLike = () => {
+  const handleAddLike = () => {
     if (post.user._id !== userId) {
-      const token = JSON.parse(localStorage.getItem('token'));
-      const rate = { like: 1 };
-      fetch(`${process.env.REACT_APP_API_URL}/api/post/${post._id}/like`, {
-        method: 'post',
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(rate),
-      })
-        .then(res => res.json())
-        .then(res => {
-          handleRefresh();
-        });
+      addLike(post._id, handleRefresh);
       setLikedPost(true);
     } else {
       console.log("Impossible d'évaluer vos posts.");
     }
   };
 
-  const removeLike = () => {
+  const handleRemoveLike = () => {
     if (post.user._id !== userId) {
-      const token = JSON.parse(localStorage.getItem('token'));
-      const rate = { like: 0 };
-      fetch(`${process.env.REACT_APP_API_URL}/api/post/${post._id}/like`, {
-        method: 'post',
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(rate),
-      })
-        .then(res => res.json())
-        .then(res => {
-          handleRefresh();
-          console.log(res.message);
-        });
+      removeLike(post._id, handleRefresh);
       setLikedPost(false);
     } else {
       console.log("Impossible d'évaluer vos posts.");
@@ -64,14 +39,14 @@ export default function LikeButton({ post, userId, handleRefresh }) {
         <FontAwesomeIcon
           icon={faThumbsUp}
           className='like-btn-inactive'
-          onClick={addLike}
+          onClick={handleAddLike}
         />
       )}
       {likedPost && (
         <FontAwesomeIcon
           icon={faThumbsUp}
           className='like-btn-active'
-          onClick={removeLike}
+          onClick={handleRemoveLike}
         />
       )}
       <div className='like-counter'>{post.likes}</div>

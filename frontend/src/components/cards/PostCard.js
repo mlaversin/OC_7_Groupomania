@@ -1,8 +1,8 @@
 import { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../../contexts/UserContext';
-import Moment from 'moment';
+import { editPost } from '../../actions/editPost';
+import { deletePost } from '../../actions/deletePost';
 import LikeButton from '../buttons/LikeButton';
-import CommentButton from '../buttons/CommentButton';
 import CommentCard from './CommentCard';
 import CommentForm from '../forms/CommentForm';
 import defaultProfilePic from '../../assets/default-profile-picture.png';
@@ -12,8 +12,10 @@ import {
   faPenToSquare,
   faTrash,
   faImage,
+  faMessage,
   faPaperPlane,
 } from '@fortawesome/free-solid-svg-icons';
+import Moment from 'moment';
 
 /*
  * This component is the post card. It displays the post information,
@@ -39,45 +41,15 @@ export default function PostCard({ post, userId, handleRefresh }) {
     setComments(post.comments);
   }, [post.comments]);
 
-  const handleEdit = id => {
-    const formData = new FormData();
-    formData.append('message', message);
-    formData.append('image', fileUpload || '');
-    formData.append('deleteFile', deleteFile);
-
-    const token = JSON.parse(localStorage.getItem('token'));
-
-    fetch(`${process.env.REACT_APP_API_URL}/api/post/${id}`, {
-      method: 'put',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      body: formData,
-    })
-      .then(res => res.json())
-      .then(res => {
-        handleRefresh();
-        console.log(res.message);
-      });
+  const handleEdit = postId => {
+    editPost(postId, message, fileUpload, deleteFile, handleRefresh);
     setIsEditing(false);
     setDeleteFile(false);
     setFileUpload(null);
   };
 
-  const handleDelete = () => {
-    const token = JSON.parse(localStorage.getItem('token'));
-    fetch(`${process.env.REACT_APP_API_URL}/api/post/${post._id}`, {
-      method: 'delete',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(res => res.json())
-      .then(res => {
-        handleRefresh();
-        console.log(res.message);
-      });
+  const handleDelete = postId => {
+    deletePost(postId, handleRefresh);
   };
 
   return (
@@ -176,7 +148,10 @@ export default function PostCard({ post, userId, handleRefresh }) {
           className='toggle-comments'
           onClick={() => setShowComments(!showComments)}
         >
-          <CommentButton commentsNumber={comments.length} />
+          <div className='post-card__comment'>
+            <FontAwesomeIcon icon={faMessage} />
+            <div className='comment-counter'>{comments.length}</div>
+          </div>
         </div>
 
         {isAuthorized && isEditing === false && (
@@ -185,7 +160,10 @@ export default function PostCard({ post, userId, handleRefresh }) {
               <button onClick={() => setIsEditing(true)}>
                 <FontAwesomeIcon icon={faPenToSquare} className='btn-icon' />
               </button>
-              <button className='delete-btn' onClick={handleDelete}>
+              <button
+                className='delete-btn'
+                onClick={() => handleDelete(post._id)}
+              >
                 <FontAwesomeIcon icon={faTrash} className='btn-icon' />
               </button>
             </div>

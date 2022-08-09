@@ -5,6 +5,8 @@ import defaultProfilePic from '../../assets/default-profile-picture.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { deleteComment } from '../../actions/deleteComment';
+import { editComment } from '../../actions/editComment';
 
 /*
  * This component is the comment card. It displays the comment information and
@@ -18,48 +20,16 @@ export default function CommentCard({ post, comment, userId, handleRefresh }) {
   const isAuthorized = isAuthenticated || isAdmin ? true : false;
 
   const [isEditing, setIsEditing] = useState(false);
-  const [editComment, setEditComment] = useState(null);
+  const [newComment, setNewComment] = useState(null);
 
-  const handleEdit = id => {
-    const token = JSON.parse(localStorage.getItem('token'));
-    const data = { commentId: id, comment: editComment };
-    fetch(
-      `${process.env.REACT_APP_API_URL}/api/post/comment/${post._id}/edit`,
-      {
-        method: 'put',
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      }
-    )
-      .then(res => res.json())
-      .then(res => {
-        handleRefresh();
-        console.log(res.message);
-      });
+  const handleEdit = commentId => {
+    const data = { commentId: commentId, comment: newComment };
+    editComment(data, post._id, handleRefresh);
     setIsEditing(false);
   };
 
   const handleDelete = () => {
-    const token = JSON.parse(localStorage.getItem('token'));
-    fetch(
-      `${process.env.REACT_APP_API_URL}/api/post/comment/${post._id}/delete`,
-      {
-        method: 'put',
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ commentId: comment._id }),
-      }
-    )
-      .then(res => res.json())
-      .then(res => {
-        console.log(res.message);
-        handleRefresh();
-      });
+    deleteComment(post._id, comment._id, handleRefresh);
   };
 
   return (
@@ -85,7 +55,7 @@ export default function CommentCard({ post, comment, userId, handleRefresh }) {
           <div className='edit-comment-form'>
             <textarea
               defaultValue={comment.comment}
-              onChange={e => setEditComment(e.target.value)}
+              onChange={e => setNewComment(e.target.value)}
             />
             <div className='edit-comment-form-buttons'>
               <button

@@ -1,5 +1,5 @@
 /*
- * This function manages the sending of posts to the DB
+ * This function manages the sending of posts to the database
  */
 export const sendPost = (
   message,
