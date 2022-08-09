@@ -53,6 +53,7 @@ export default function CommentCard({ post, comment, userId, handleRefresh }) {
     )
       .then(res => res.json())
       .then(res => {
+        console.log(res.message);
         handleRefresh();
       });
   };
