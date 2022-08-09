@@ -53,6 +53,7 @@ cd MorganLaversin_7_16062022
 ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 #### 1. Backend
 
 - From the root folder, navigate into the backend folder and install the dependencies :
@@ -75,6 +76,7 @@ npm start
 ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 #### 2. Frontend
 
 - From the root folder, navigate into the frontend folder and install the dependencies :
