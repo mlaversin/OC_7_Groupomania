@@ -36,11 +36,12 @@ export default function Auth() {
                 />
               </a>
             </div>
-            <div className='auth-header-nav'>
+            <nav className='auth-header-nav'>
               <ul>
                 <li
                   id='login'
                   className={`login-tab ${loginForm ? 'active' : null}`}
+                  tabIndex='0'
                   onClick={handleForms}
                 >
                   Se connecter
@@ -48,12 +49,13 @@ export default function Auth() {
                 <li
                   id='signup'
                   className={`signup-tab ${signUpForm ? 'active' : null}`}
+                  tabIndex='0'
                   onClick={handleForms}
                 >
                   S'inscrire
                 </li>
               </ul>
-            </div>
+            </nav>
           </div>
         </header>
         <div className='auth-modal'>

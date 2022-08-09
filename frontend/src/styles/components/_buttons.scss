@@ -16,6 +16,9 @@
     font-size: $fs-200;
   }
 }
+button:focus {
+  border: 2px solid black;
+}
 
 .btn-primary {
   background-color: $clr-primary;

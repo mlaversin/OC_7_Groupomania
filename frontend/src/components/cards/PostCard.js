@@ -148,7 +148,7 @@ export default function PostCard({ post, userId, handleRefresh }) {
           className='toggle-comments'
           onClick={() => setShowComments(!showComments)}
         >
-          <div className='post-card__comment'>
+          <div className='post-card__comment' tabIndex='0'>
             <FontAwesomeIcon icon={faMessage} />
             <div className='comment-counter'>{comments.length}</div>
           </div>

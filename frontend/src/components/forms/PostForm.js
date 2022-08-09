@@ -89,7 +89,7 @@ export default function PostForm({ handleRefresh }) {
       <div className='post-form__footer'>
         <div className='image-buttons'>
           <div className='btn add-image-btn'>
-            <label htmlFor='changeImageInput'>
+            <label htmlFor='changeImageInput' tabIndex='0'>
               <FontAwesomeIcon icon={faImage} className='btn-icon' />
               Choisir une image
             </label>

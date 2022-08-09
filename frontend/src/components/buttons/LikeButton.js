@@ -34,7 +34,7 @@ export default function LikeButton({ post, userId, handleRefresh }) {
   }, [post.usersLiked, userId]);
 
   return (
-    <div className='post-card__rating'>
+    <div className='post-card__rating' tabIndex='0'>
       {likedPost === false && (
         <FontAwesomeIcon
           icon={faThumbsUp}

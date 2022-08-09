@@ -35,6 +35,7 @@ export default function Header() {
               <li
                 onClick={() => navigate('/')}
                 className={`btn-icon ${pathname === '/' ? 'active' : null}`}
+                tabIndex='0'
               >
                 <FontAwesomeIcon icon={faMessage} className='btn-icon' />
                 Messages
@@ -44,6 +45,7 @@ export default function Header() {
                 className={`btn-icon ${
                   pathname === '/profil' ? 'active' : null
                 }`}
+                tabIndex='0'
               >
                 <FontAwesomeIcon icon={faUser} className='btn-icon' />
                 {userName}
