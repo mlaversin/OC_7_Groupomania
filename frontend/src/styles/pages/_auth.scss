@@ -1,7 +1,16 @@
 .authentication-page {
   @include flex-col;
   height: 100vh;
+
+  @include mq(mobilelg) {
+    justify-content: flex-start;
+    margin-top: 6rem;
+  }
 }
+
+/*******************************
+  *********** HEADER ***********
+ ******************************/
 
 .auth-header {
   height: 3.5rem;
@@ -12,19 +21,33 @@
   top: 0;
   left: 0;
   background-color: #fff;
+
+  @include mq(mobilelg) {
+    height: 7rem;
+    border-bottom: unset;
+  }
 }
 
 .auth-header-container {
   height: 100%;
   max-width: 1100px;
   margin: 0 auto;
-  display: flex;
+  @include flex-row;
   justify-content: space-between;
   align-items: center;
+
+  @include mq(mobilelg) {
+    flex-direction: column;
+  }
 }
 
 .auth-logo-gpm {
   width: 15rem;
+
+  @include mq(mobilelg) {
+    width: 12rem;
+    margin-top: 1rem;
+  }
 }
 
 .header-nav li {
@@ -37,12 +60,21 @@
   background-color: $clr-secondary;
 }
 
+/*******************************
+  *********** MODAL ***********
+ ******************************/
+
 .auth-modal {
   padding: 3rem 0;
   width: 30rem;
   max-width: 30rem;
   border-radius: 2rem;
   background-color: $clr-secondary-light;
+
+  @include mq(mobilelg) {
+    width: 100%;
+    border-radius: unset;
+  }
 }
 
 .auth-modal-container {
@@ -68,11 +100,7 @@ input {
 }
 
 input:focus {
-  border: 1px solid black;
-}
-
-label {
-  display: block;
+  border: 1px solid $clr-primary;
 }
 
 .password-info {

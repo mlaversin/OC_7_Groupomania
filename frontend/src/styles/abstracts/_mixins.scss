@@ -12,23 +12,18 @@
 }
 
 @mixin mq($size) {
+  @if ($size == mobile) {
+    @media screen and (max-width: #{$mobile}px) {
+      @content;
+    }
+  }
   @if ($size == mobilelg) {
-    @media screen and (min-width: #{$mobilelg}px) {
+    @media screen and (max-width: #{$mobilelg}px) {
       @content;
     }
   }
   @if ($size == tablet) {
-    @media screen and (min-width: #{$tablet}px) {
-      @content;
-    }
-  }
-  @if ($size == desktop) {
-    @media screen and (min-width: #{$desktop}px) {
-      @content;
-    }
-  }
-  @if ($size == desktoplg) {
-    @media screen and (min-width: #{$desktoplg}px) {
+    @media screen and (max-width: #{$tablet}px) {
       @content;
     }
   }
