@@ -84,20 +84,20 @@ export default function PostForm({ handleRefresh }) {
       <div className='post-form__footer'>
         <div className='image-buttons'>
           <div className='btn add-image-btn'>
-            <label htmlFor='image'>
+            <label htmlFor='changeImageInput'>
               <FontAwesomeIcon icon={faImage} className='btn-icon' />
               Choisir une image
-              <input
-                type='file'
-                id='image'
-                name='image'
-                accept='image/jpg, image/jpeg, image/png, image/gif'
-                onChange={e => {
-                  setFileUpload(e.target.files[0]);
-                  handleFileValidation(e.target.files[0]);
-                }}
-              />
             </label>
+            <input
+              type='file'
+              id='changeImageInput'
+              name='image'
+              accept='image/jpg, image/jpeg, image/png, image/gif'
+              onChange={e => {
+                setFileUpload(e.target.files[0]);
+                handleFileValidation(e.target.files[0]);
+              }}
+            />
           </div>
         </div>
         <div className='send-btn'>

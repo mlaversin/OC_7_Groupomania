@@ -1,5 +1,7 @@
 require('dotenv').config();
 const express = require('express');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
 const mongoose = require('mongoose');
 const path = require('path');
 
@@ -23,6 +25,22 @@ mongoose
  * Parses incoming JSON requests and puts the parsed data in req.body
  */
 app.use(express.json());
+
+/*
+ * Secure the app by setting various HTTP headers
+ */
+app.use(helmet({ crossOriginResourcePolicy: false }));
+
+/*
+ * Limit the number of requests from the same IP address
+ */
+const limiter = rateLimit({
+  windowMs: 5 * 60 * 1000,
+  max: 3000,
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+app.use(limiter);
 
 /*
  * Allows cross-origin requests

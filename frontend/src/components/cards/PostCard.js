@@ -128,9 +128,7 @@ export default function PostCard({ post, userId, handleRefresh }) {
                     id='image'
                     name='image'
                     accept='image/jpg, image/jpeg, image/png, image/gif'
-                    onChange={e => {
-                      setFileUpload(e.target.files[0]);
-                    }}
+                    onChange={e => setFileUpload(e.target.files[0])}
                   />
                 </label>
               </div>

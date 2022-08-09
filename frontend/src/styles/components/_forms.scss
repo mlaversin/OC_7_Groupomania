@@ -95,12 +95,17 @@ textarea {
   cursor: pointer;
 }
 
-.edit-post-form .add-img-btn label {
-  cursor: inherit;
+.edit-post-form input[type='file'] {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
 }
 
-.edit-post-form input[type='file'] {
-  display: none;
+.edit-post-form .add-img-btn label {
+  cursor: pointer;
 }
 
 .edit-post-form .delete-img-btn {
