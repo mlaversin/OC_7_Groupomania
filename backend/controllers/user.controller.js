@@ -105,7 +105,6 @@ exports.updateUserPic = (req, res) => {
         else if (req.file) {
           // delete the old image if it exists
           if (user.pictureUrl) {
-            console.log('ya une image');
             const filename = user.pictureUrl.split('/uploads/')[1];
             fs.unlink(`uploads/${filename}`, error => {
               if (error) console.error('ignored', error.message);

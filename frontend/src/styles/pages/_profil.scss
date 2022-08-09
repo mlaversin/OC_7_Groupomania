@@ -1,8 +1,45 @@
 .profile-page {
+  width: 50%;
+  max-width: 500px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.picture-container {
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.handle-img-btn {
+  @include flex-row;
+  color: $clr-primary;
+  font-size: $fs-400;
+}
+
+.handle-img-btn .change-img-btn,
+.handle-img-btn .delete-img-btn {
+  color: $clr-primary;
+  font-size: $fs-300;
+}
+
+.change-img-btn {
+  cursor: pointer;
+}
+
+.edit-pic-container {
+  @include flex-col;
+}
+
+.edit-pic-container input[type='file'] {
+  display: none;
+}
+
+.info-container {
+  width: 100%;
+  margin-bottom: 2rem;
 }
 
 .field-container {
@@ -23,9 +60,18 @@
   text-align: center;
 }
 
+.profile-pic-container {
+  @include flex-col;
+}
+
 .profile-pic {
+  margin: 2rem 0;
   border-radius: 50%;
   object-fit: cover;
-  width: 10rem;
-  height: 10rem;
+  width: 13rem;
+  height: 13rem;
+}
+
+.edit-pic-btn {
+  margin: 1.5rem 0;
 }
