@@ -6,6 +6,17 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  @include mq(mobilelg) {
+    width: 90%;
+  }
+}
+
+.profile-page h1 {
+  @include mq(mobilelg) {
+    margin-top: 4rem;
+    padding: 2rem 0;
+    font-size: $fs-700;
+  }
 }
 
 .picture-container {
@@ -17,6 +28,9 @@
   @include flex-row;
   color: $clr-primary;
   font-size: $fs-400;
+  @include mq(mobilelg) {
+    flex-direction: column;
+  }
 }
 
 .handle-img-btn .change-img-btn,

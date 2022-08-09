@@ -7,6 +7,11 @@
   top: 0;
   left: 0;
   background-color: #fff;
+
+  @include mq(mobilelg) {
+    border-bottom: unset;
+    height: 8rem;
+  }
 }
 
 .header-container {
@@ -15,10 +20,18 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @include mq(mobilelg) {
+    @include flex-col;
+  }
 }
 
 .logo-gpm {
   width: 15rem;
+  @include mq(mobilelg) {
+    width: 11rem;
+    margin: 1rem 0;
+  }
 }
 
 .logout-btn {
@@ -28,4 +41,11 @@
 
 .header-nav ul {
   display: flex;
+}
+
+.header-nav ul li:last-child {
+  @include mq(mobilelg) {
+    width: 2rem;
+    padding-left: 0;
+  }
 }
