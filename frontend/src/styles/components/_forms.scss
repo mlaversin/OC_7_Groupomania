@@ -91,6 +91,7 @@ textarea {
   width: 12rem;
   font-size: 14px;
   color: $clr-primary;
+  text-align: center;
   cursor: pointer;
 }
 
@@ -119,8 +120,8 @@ textarea {
 }
 
 /*******************************
-    ******** COMMENT FORM ********
-   ******************************/
+ ******** COMMENT FORM ********
+  ******************************/
 
 .comment-form {
   position: relative;
@@ -140,4 +141,32 @@ textarea {
   position: absolute;
   top: 0.6rem;
   right: 0.3rem;
+}
+
+/*******************************
+ ****** EDIT COMMENT FORM ******
+  ******************************/
+
+.edit-comment-form {
+  height: 7rem;
+  margin-bottom: 1rem;
+  @include flex-col;
+  background-color: #eee;
+  border-radius: 0.5rem;
+}
+.edit-comment-form textarea {
+  width: 95%;
+  resize: none;
+  margin: 0 auto;
+  padding: 0.5rem 3rem 0.5rem 1rem;
+  border-radius: 0.5rem;
+}
+.edit-comment-form-buttons button {
+  font-size: 13px;
+  padding: 0.3rem 0.5rem;
+}
+
+.edit-comment-form .btn-primary {
+  margin-bottom: 0;
+  margin-top: 0.5rem;
 }

@@ -10,10 +10,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faArrowRotateLeft,
   faPenToSquare,
+  faTrash,
+  faImage,
+  faPaperPlane,
 } from '@fortawesome/free-solid-svg-icons';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import { faImage } from '@fortawesome/free-solid-svg-icons';
-import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 
 export default function PostCard({ post, userId, handleRefresh }) {
   const { userInfo } = useContext(UserContext);

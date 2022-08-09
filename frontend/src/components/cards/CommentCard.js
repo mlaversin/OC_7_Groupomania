@@ -77,17 +77,29 @@ export default function CommentCard({ post, comment, userId, handleRefresh }) {
           <p className='comment-card__comment'>{comment.comment}</p>
         )}
         {isEditing && (
-          <div>
+          <div className='edit-comment-form'>
             <textarea
               defaultValue={comment.comment}
               onChange={e => setEditComment(e.target.value)}
             />
-            <button onClick={() => handleEdit(comment._id)}>Valider</button>
-            <button onClick={() => setIsEditing(false)}>Annuler</button>
+            <div className='edit-comment-form-buttons'>
+              <button
+                className='btn btn-black'
+                onClick={() => setIsEditing(false)}
+              >
+                Annuler
+              </button>
+              <button
+                className='btn btn-primary'
+                onClick={() => handleEdit(comment._id)}
+              >
+                Valider
+              </button>
+            </div>
           </div>
         )}
         <div className='edit-delete-buttons'>
-          {isAuthorized && (
+          {isAuthorized && isEditing === false && (
             <div>
               <button onClick={() => setIsEditing(true)}>
                 <FontAwesomeIcon icon={faPenToSquare} className='btn-icon' />
