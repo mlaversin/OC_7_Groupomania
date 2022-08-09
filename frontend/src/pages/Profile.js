@@ -1,17 +1,34 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Formik, Field, Form, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 import Layout from '../components/layout/Layout';
 import defaultProfilePic from '../assets/default-profile-picture.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faImage, faTrash } from '@fortawesome/free-solid-svg-icons';
+import {
+  faImage,
+  faPenToSquare,
+  faTrash,
+} from '@fortawesome/free-solid-svg-icons';
 
 export default function Profile() {
   const navigate = useNavigate();
   const [user, setUser] = useState();
 
+  const [isEditing, setIsEditing] = useState(false);
   const [isEditingPic, setIsEditingPic] = useState(false);
   const [fileUpload, setFileUpload] = useState();
   const [deleteFile, setDeleteFile] = useState(false);
+
+  const validationSchema = Yup.object().shape({
+    firstname: Yup.string().required('Ce champs est requis.'),
+    lastname: Yup.string().required('Ce champs est requis.'),
+  });
+
+  const initialValues = {
+    firstname: '',
+    lastname: '',
+  };
 
   const handleEditPic = id => {
     const formData = new FormData();
@@ -84,6 +101,26 @@ export default function Profile() {
       .catch(err => console.log(err));
   };
 
+  const handleSubmit = values => {
+    const token = JSON.parse(localStorage.getItem('token'));
+    const userId = JSON.parse(localStorage.getItem('userId'));
+
+    fetch(`${process.env.REACT_APP_API_URL}/api/user/${userId}`, {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(values),
+    })
+      .then(res => res.json())
+      .then(res => {
+        console.log(res.message);
+        handleRefresh();
+      })
+      .catch(err => console.log(err));
+  };
+
   return (
     <>
       <Layout>
@@ -113,7 +150,7 @@ export default function Profile() {
                   onClick={() => setIsEditingPic(true)}
                 >
                   <FontAwesomeIcon icon={faImage} className='btn-icon' />
-                  {user.pictureUrl ? "Editer l'image" : 'Choisir une image'}
+                  Editer l'image
                 </button>
               )}
               {isEditingPic && (
@@ -166,14 +203,73 @@ export default function Profile() {
               <div className='field-title'>Mon addresse email</div>
               <div className='field-content'>{user ? user.email : ''}</div>
             </div>
-            <div className='field-container'>
-              <div className='field-title'>Mon prénom</div>
-              <div className='field-content'>{user ? user.firstname : ''}</div>
-            </div>
-            <div className='field-container'>
-              <div className='field-title'>Mon nom</div>
-              <div className='field-content'>{user ? user.lastname : ''}</div>
-            </div>
+            {isEditing === false && (
+              <>
+                <div className='field-container'>
+                  <div className='field-title'>Mon prénom</div>
+                  <div className='field-content'>
+                    {user ? user.firstname : ''}
+                  </div>
+                </div>
+                <div className='field-container'>
+                  <div className='field-title'>Mon nom</div>
+                  <div className='field-content'>
+                    {user ? user.lastname : ''}
+                  </div>
+                </div>
+                <div className='field-container'>
+                  <button
+                    className='btn btn-primary edit-info-btn'
+                    onClick={() => setIsEditing(true)}
+                  >
+                    <FontAwesomeIcon
+                      icon={faPenToSquare}
+                      className='btn-icon'
+                    />
+                    Corriger les infos
+                  </button>
+                </div>
+              </>
+            )}
+            {isEditing && (
+              <Formik
+                initialValues={initialValues}
+                validationSchema={validationSchema}
+                onSubmit={values => {
+                  handleSubmit(values);
+                  setIsEditing(false);
+                }}
+              >
+                <Form className='form edit-infos-form'>
+                  <div className='field-container'>
+                    <label htmlFor='firstname'>Mon prénom</label>
+                    <Field type='firstname' id='firstname' name='firstname' />
+                    <div className='error-message'>
+                      <ErrorMessage name='firstname' />
+                    </div>
+                  </div>
+                  <div className='field-container'>
+                    <label htmlFor='lastname'>Mon nom</label>
+                    <Field type='lastname' id='lastname' name='lastname' />
+                    <div className='error-message'>
+                      <ErrorMessage name='lastname' />
+                    </div>
+                  </div>
+                  <div className='field-container-btn'>
+                    <button
+                      className='btn btn-black'
+                      onClick={() => setIsEditing(false)}
+                    >
+                      Annuler
+                    </button>
+                    <button type='submit' className='btn btn-primary'>
+                      Valider
+                    </button>
+                  </div>
+                </Form>
+              </Formik>
+            )}
+            <div className='info-container-buttons'></div>
           </div>
         </main>
       </Layout>

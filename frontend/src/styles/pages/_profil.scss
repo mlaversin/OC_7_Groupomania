@@ -40,10 +40,13 @@
 .info-container {
   width: 100%;
   margin-bottom: 2rem;
+  margin-bottom: 3rem;
 }
 
 .field-container {
-  margin: 2rem 0;
+  margin: 1rem 0;
+  width: 100%;
+  @include flex-col;
 }
 
 .field-content {
@@ -74,4 +77,17 @@
 
 .edit-pic-btn {
   margin: 1.5rem 0;
+}
+
+.info-container-buttons {
+  @include flex-col;
+}
+
+.edit-infos-form {
+  @include flex-col;
+}
+
+.edit-infos-form input {
+  background-color: #eee;
+  width: 60%;
 }
