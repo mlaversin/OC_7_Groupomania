@@ -4,6 +4,10 @@ import SignUpForm from '../components/forms/SignUpForm';
 import Footer from '../components/layout/Footer';
 import logo from '../assets/logo-gpm.png';
 
+/*
+ * This component is the authentication page.
+ * It contains the login form and the registration form.
+ */
 export default function Auth() {
   const [loginForm, setLoginForm] = useState(true);
   const [signUpForm, setSignUpForm] = useState(false);

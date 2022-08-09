@@ -6,6 +6,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
+/*
+ * This component is the comment card. It displays the comment information and
+ * the form used to edit comment
+ */
 export default function CommentCard({ post, comment, userId, handleRefresh }) {
   const { userInfo } = useContext(UserContext);
 

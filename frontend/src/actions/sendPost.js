@@ -1,3 +1,6 @@
+/*
+ * This function manages the sending of posts to the DB
+ */
 export const sendPost = (
   message,
   setMessage,

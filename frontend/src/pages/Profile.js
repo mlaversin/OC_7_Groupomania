@@ -11,6 +11,10 @@ import {
   faTrash,
 } from '@fortawesome/free-solid-svg-icons';
 
+/*
+ * This component is the profile page. It displays the user's photo
+ * and information and allows the user to edit them
+ */
 export default function Profile() {
   const navigate = useNavigate();
   const [user, setUser] = useState();

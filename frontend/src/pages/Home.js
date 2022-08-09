@@ -5,6 +5,10 @@ import Layout from '../components/layout/Layout';
 import PostForm from '../components/forms/PostForm';
 import PostCard from '../components/cards/PostCard';
 
+/*
+ * This component is the homepage of the application.
+ * It contains the post submission form and post display.
+ */
 export default function Home() {
   const { setUserInfo } = useContext(UserContext);
   const navigate = useNavigate();
@@ -61,6 +65,7 @@ export default function Home() {
       .catch(err => console.log(err));
   }, [navigate]);
 
+  // This function manages post display refresh
   const handleRefresh = () => {
     const token = JSON.parse(localStorage.getItem('token'));
 

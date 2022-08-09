@@ -3,6 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
+/*
+ * This component is the registration form which is displayed
+ * on the authentication page
+ */
 export default function SignUpForm() {
   const navigate = useNavigate();
 

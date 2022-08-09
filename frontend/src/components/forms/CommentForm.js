@@ -5,6 +5,10 @@ import * as Yup from 'yup';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 
+/*
+ * This component is the comment form which is displayed
+ * on PostCard component.
+ */
 export default function CommentForm({ post, handleRefresh }) {
   const { userInfo } = useContext(UserContext);
 

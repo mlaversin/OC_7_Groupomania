@@ -15,6 +15,10 @@ import {
   faPaperPlane,
 } from '@fortawesome/free-solid-svg-icons';
 
+/*
+ * This component is the post card. It displays the post information,
+ * the form to send a comment and all comments (CommentCard).
+ */
 export default function PostCard({ post, userId, handleRefresh }) {
   const { userInfo } = useContext(UserContext);
 

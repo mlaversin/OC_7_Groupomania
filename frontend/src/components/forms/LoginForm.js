@@ -4,6 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
+/*
+ * This component is the login form which is displayed
+ * on the authentication page
+ */
 export default function LoginForm() {
   const { setUserInfo } = useContext(UserContext);
   const navigate = useNavigate();

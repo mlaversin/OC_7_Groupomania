@@ -1,5 +1,9 @@
 import React from 'react';
 
+/*
+ * This component is the not found page which is displayed
+ * in the event of a 404 error
+ */
 export default function NotFound() {
   return (
     <>

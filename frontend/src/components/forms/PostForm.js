@@ -5,6 +5,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faImage } from '@fortawesome/free-solid-svg-icons';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 
+/*
+ * This component is the form that manages the sending of posts
+ * after the validation of the fields. The handleRefresh function allows
+ * to refresh the display of pots in the homepage.
+ */
 export default function PostForm({ handleRefresh }) {
   const { userInfo } = useContext(UserContext);
 
