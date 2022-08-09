@@ -5,6 +5,16 @@
   border-radius: 9999px;
   font-weight: $fw-bold;
   font-size: $fs-400;
+
+  @include mq(mobilelg) {
+    padding: 0.4rem 0.8rem;
+    font-size: $fs-300;
+  }
+
+  @include mq(mobilesm) {
+    padding: 0.2rem 0.6rem;
+    font-size: $fs-200;
+  }
 }
 
 .btn-primary {

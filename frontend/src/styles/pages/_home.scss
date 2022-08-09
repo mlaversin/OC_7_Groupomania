@@ -5,4 +5,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @include mq(tablet) {
+    width: 60%;
+  }
+  @include mq(mobilelg) {
+    width: 70%;
+  }
+  @include mq(mobile) {
+    width: 80%;
+  }
 }

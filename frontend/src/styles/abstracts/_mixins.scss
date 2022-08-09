@@ -12,6 +12,11 @@
 }
 
 @mixin mq($size) {
+  @if ($size == mobilesm) {
+    @media screen and (max-width: #{$mobilesm}px) {
+      @content;
+    }
+  }
   @if ($size == mobile) {
     @media screen and (max-width: #{$mobile}px) {
       @content;

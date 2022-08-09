@@ -1,15 +1,22 @@
 .post-card {
   padding: 0 1.75rem;
   margin-bottom: 0.75rem;
-  max-width: 60vw;
   border: 1px solid #eee;
   border-radius: 1rem;
+
+  @include mq(mobilelg) {
+    padding: 0 0.75rem;
+  }
 
   &__header {
     padding: 1rem 0;
     width: 100%;
     @include flex-row;
     justify-content: space-between;
+
+    @include mq(mobilelg) {
+      flex-direction: column;
+    }
 
     &__author {
       @include flex-row;
@@ -37,6 +44,10 @@
   &__body {
     &__message {
       text-align: justify;
+
+      @include mq(mobilesm) {
+        font-size: $fs-300;
+      }
     }
 
     &__image {
@@ -49,6 +60,10 @@
     padding: 1.5rem 0;
     @include flex-row;
     justify-content: space-around;
+
+    @include mq(mobilelg) {
+      padding: 0.75rem 0;
+    }
 
     .like-counter {
       padding-left: 1rem;

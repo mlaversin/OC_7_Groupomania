@@ -23,6 +23,10 @@ textarea {
   background-color: rgb(241, 241, 241);
   border-radius: 1rem;
 
+  @include mq(mobilelg) {
+    margin-top: 5rem;
+  }
+
   &__body {
     width: 100%;
 
@@ -34,6 +38,10 @@ textarea {
       padding: 0.5rem;
       border-radius: 0.5rem;
       font-size: 16px;
+
+      @include mq(mobilesm) {
+        height: 9rem;
+      }
     }
   }
 
@@ -41,6 +49,10 @@ textarea {
     width: 100%;
     @include flex-row;
     justify-content: space-between;
+
+    @include mq(mobilesm) {
+      flex-direction: column;
+    }
 
     .add-image-btn {
       width: 11rem;
