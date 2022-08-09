@@ -22,8 +22,6 @@
   </ul>
 </details>
 
-This seventh and last project of my training program consists in building a full-stack solution for a corporate social network.
-
 ## About the project
 
 This seventh and last project of my training program consists in building a full-stack solution for a corporate social network.
@@ -36,6 +34,8 @@ The project is based on a MERN stack. MERN stands for MongoDB, Express, React an
 - [![Express.js][express.js]][express-url]
 - [![React][react.js]][react-url]
 - [![Node.js][node.js]][node-url]
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Getting Started
 
@@ -53,7 +53,6 @@ cd MorganLaversin_7_16062022
 ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 #### 1. Backend
 
 - From the root folder, navigate into the backend folder and install the dependencies :
@@ -76,7 +75,6 @@ npm start
 ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 #### 2. Frontend
 
 - From the root folder, navigate into the frontend folder and install the dependencies :
