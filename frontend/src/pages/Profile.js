@@ -112,7 +112,8 @@ export default function Profile() {
                   className='btn btn-primary edit-pic-btn'
                   onClick={() => setIsEditingPic(true)}
                 >
-                  Editer
+                  <FontAwesomeIcon icon={faImage} className='btn-icon' />
+                  {user.pictureUrl ? "Editer l'image" : 'Choisir une image'}
                 </button>
               )}
               {isEditingPic && (
@@ -120,7 +121,7 @@ export default function Profile() {
                   <div className='handle-img-btn'>
                     <label htmlFor='image' className='btn change-img-btn'>
                       <FontAwesomeIcon icon={faImage} className='btn-icon' />
-                      Choisir une image
+                      Sélectionner un fichier
                       <input
                         type='file'
                         id='image'
