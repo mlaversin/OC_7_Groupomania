@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../../contexts/UserContext';
 import { editPost } from '../../actions/editPost';
+import EditPostForm from '../forms/EditPostForm';
 import { deletePost } from '../../actions/deletePost';
 import LikeButton from '../buttons/LikeButton';
 import CommentCard from './CommentCard';
@@ -8,12 +9,9 @@ import CommentForm from '../forms/CommentForm';
 import defaultProfilePic from '../../assets/default-profile-picture.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faArrowRotateLeft,
   faPenToSquare,
   faTrash,
-  faImage,
   faMessage,
-  faPaperPlane,
 } from '@fortawesome/free-solid-svg-icons';
 import Moment from 'moment';
 
@@ -89,57 +87,15 @@ export default function PostCard({ post, userId, handleRefresh }) {
           </>
         )}
         {isEditing && (
-          <div className='edit-post-form'>
-            <textarea
-              defaultValue={message}
-              onChange={e => setMessage(e.target.value)}
-            />
-            <div className='edit-post-form-img'>
-              <div className='btn add-img-btn'>
-                <label htmlFor='image'>
-                  <FontAwesomeIcon icon={faImage} className='btn-icon' />
-                  Choisir une image
-                  <input
-                    type='file'
-                    id='image'
-                    name='image'
-                    accept='image/jpg, image/jpeg, image/png, image/gif'
-                    onChange={e => setFileUpload(e.target.files[0])}
-                  />
-                </label>
-              </div>
-              {post.imageUrl && (
-                <>
-                  <button
-                    className='btn delete-img-btn'
-                    onClick={() => setDeleteFile(true)}
-                  >
-                    <FontAwesomeIcon icon={faTrash} className='btn-icon' />
-                    Supprimer l'image
-                  </button>
-                </>
-              )}
-            </div>
-            <div className='edit-post-form-footer'>
-              <button
-                className='btn btn-black'
-                onClick={() => setIsEditing(false)}
-              >
-                <FontAwesomeIcon
-                  icon={faArrowRotateLeft}
-                  className='btn-icon'
-                />
-                Annuler
-              </button>
-              <button
-                className='btn btn-primary'
-                onClick={() => handleEdit(post._id)}
-              >
-                <FontAwesomeIcon icon={faPaperPlane} className='btn-icon' />
-                Publier
-              </button>
-            </div>
-          </div>
+          <EditPostForm
+            post={post}
+            message={message}
+            setMessage={setMessage}
+            setFileUpload={setFileUpload}
+            setIsEditing={setIsEditing}
+            setDeleteFile={setDeleteFile}
+            handleEdit={handleEdit}
+          />
         )}
       </div>
       <div className='post-card__footer'>
