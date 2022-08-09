@@ -1,8 +1,38 @@
 # OpenClassrooms / Project 7
 
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ul>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
+  </ul>
+</details>
+
+<a name="readme-top"></a>
+
 This seventh and last project of my training program consists in building a full-stack solution for a corporate social network.
 
-## Built With
+## About the project
+
+This seventh and last project of my training program consists in building a full-stack solution for a corporate social network.
 
 The project is based on a MERN stack. MERN stands for MongoDB, Express, React and Node.
 
@@ -11,23 +41,27 @@ The project is based on a MERN stack. MERN stands for MongoDB, Express, React an
 - [![React][react.js]][react-url]
 - [![Node.js][node.js]][node-url]
 
-## Project installation
+## Getting Started
+
+### Prerequisites
 
 You will need to have Node and `npm` installed locally on your machine.
+
+### Installation
 
 - Clone this repo and navigate into the root folder :
 
 ```shell
 git clone https://github.com/mlaversin/MorganLaversin_7_16062022.git
-cd .\MorganLaversin_7_16062022\
+cd MorganLaversin_7_16062022
 ```
 
-### 1. Backend
+#### 1. Backend
 
 - From the root folder, navigate into the backend folder and install the dependencies :
 
 ```shell
-cd ./backend
+cd backend
 npm install
 ```
 
@@ -43,12 +77,12 @@ npm install
 npm start
 ```
 
-### 2. Frontend
+#### 2. Frontend
 
 - From the root folder, navigate into the frontend folder and install the dependencies :
 
 ```shell
-cd ./frontend
+cd frontend
 npm install
 ```
 
@@ -57,6 +91,8 @@ npm install
 ```shell
 npm start
 ```
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
 
