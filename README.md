@@ -1,3 +1,5 @@
+<a name="readme-top"></a>
+
 # OpenClassrooms / Project 7
 
 <!-- TABLE OF CONTENTS -->
@@ -17,22 +19,16 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ul>
 </details>
-
-<a name="readme-top"></a>
 
 This seventh and last project of my training program consists in building a full-stack solution for a corporate social network.
 
 ## About the project
 
 This seventh and last project of my training program consists in building a full-stack solution for a corporate social network.
+
+### Build With
 
 The project is based on a MERN stack. MERN stands for MongoDB, Express, React and Node.
 
@@ -45,7 +41,7 @@ The project is based on a MERN stack. MERN stands for MongoDB, Express, React an
 
 ### Prerequisites
 
-You will need to have Node and `npm` installed locally on your machine.
+You will need to have `Node.js` and `npm` installed locally on your machine.
 
 ### Installation
 
@@ -56,6 +52,8 @@ git clone https://github.com/mlaversin/MorganLaversin_7_16062022.git
 cd MorganLaversin_7_16062022
 ```
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 #### 1. Backend
 
 - From the root folder, navigate into the backend folder and install the dependencies :
@@ -65,9 +63,9 @@ cd backend
 npm install
 ```
 
-- You need to create a MongoDB database
+- You need to create a MongoDB database.
 
-- You need to create an .env file following the instructions in `.env.example` file
+- You need to create an .env file following the instructions in `.env.example` file.
 
 - You need to create an `uploads` folder in the backend root folder.
 
@@ -76,6 +74,8 @@ npm install
 ```shell
 npm start
 ```
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 #### 2. Frontend
 
