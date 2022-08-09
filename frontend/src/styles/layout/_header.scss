@@ -43,6 +43,20 @@
   display: flex;
 }
 
+.header-nav li {
+  padding: 0.6rem 1.4rem;
+  border-radius: 1rem;
+  font-weight: $fw-bold;
+  cursor: pointer;
+}
+.header-nav li.active {
+  background-color: $clr-secondary;
+  @include mq(mobilelg) {
+    background-color: #fff;
+    color: $clr-primary;
+  }
+}
+
 .header-nav ul li:last-child {
   @include mq(mobilelg) {
     width: 2rem;

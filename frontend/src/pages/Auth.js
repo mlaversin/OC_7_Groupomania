@@ -36,7 +36,7 @@ export default function Auth() {
                 />
               </a>
             </div>
-            <div className='header-nav'>
+            <div className='auth-header-nav'>
               <ul>
                 <li
                   id='login'

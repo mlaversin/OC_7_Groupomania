@@ -50,14 +50,25 @@
   }
 }
 
-.header-nav li {
+.auth-header-nav ul {
+  @include flex-row;
+  @include mq(mobilelg) {
+    width: 100%;
+  }
+}
+
+.auth-header-nav li {
   padding: 0.6rem 1.4rem;
   border-radius: 1rem;
   font-weight: $fw-bold;
   cursor: pointer;
 }
-.header-nav li.active {
+.auth-header-nav li.active {
   background-color: $clr-secondary;
+  @include mq(mobilelg) {
+    background-color: #fff;
+    color: $clr-primary;
+  }
 }
 
 /*******************************
@@ -107,4 +118,8 @@ input:focus {
   padding-top: 0.4rem;
   font-size: $fs-200;
   font-style: italic;
+
+  @include mq(mobile) {
+    text-align: center;
+  }
 }
