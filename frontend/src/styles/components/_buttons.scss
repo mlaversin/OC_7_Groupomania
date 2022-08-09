@@ -50,4 +50,24 @@
 
 .btn-icon {
   padding-right: 0.5rem;
+  @include mq(mobilesm) {
+    font-size: $fs-200;
+  }
+}
+
+.send-comment-btn {
+  width: 2rem;
+  height: 2rem;
+  @include flex-col;
+  @include mq(mobilesm) {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
+.send-comment-btn .btn-icon {
+  padding: 0;
+  font-size: 17px;
+  @include mq(mobilesm) {
+    font-size: $fs-200;
+  }
 }

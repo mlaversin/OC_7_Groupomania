@@ -49,16 +49,6 @@
   margin-left: 1rem;
 }
 
-.send-comment-btn {
-  width: 2rem;
-  height: 2rem;
-  @include flex-col;
-}
-.send-comment-btn .btn-icon {
-  padding: 0;
-  font-size: 18px;
-}
-
 .comment-card .edit-delete-buttons {
   position: absolute;
   top: 1rem;
