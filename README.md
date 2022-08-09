@@ -1,6 +1,6 @@
-<a name="readme-top"></a>
-
 # OpenClassrooms / Project 7
+
+<a name="readme-top"></a>
 
 <!-- TABLE OF CONTENTS -->
 <details>
