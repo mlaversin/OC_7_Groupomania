@@ -21,9 +21,10 @@ export default function PostForm({ handleRefresh }) {
   const [errorFileUpload, setErrorFileUpload] = useState();
 
   const handleMessageValidation = () => {
-    setFormIsValid(true);
     setErrorMessage();
     if (message === undefined) {
+      setErrorMessage('Veuillez entrer un message');
+    } else if (message.length === 0) {
       setErrorMessage('Veuillez entrer un message.');
       setFormIsValid(false);
     } else if (message.length < 11) {
@@ -34,6 +35,8 @@ export default function PostForm({ handleRefresh }) {
         'Votre message est trop long (max. 500 caractères)'
       );
       setFormIsValid(false);
+    } else {
+      setFormIsValid(true);
     }
   };
 
@@ -49,16 +52,20 @@ export default function PostForm({ handleRefresh }) {
         'Type de fichier non pris en charge (uniquemment .jpeg, .jpg, .png et .gif).'
       );
       setFormIsValid(false);
-    }
-    if (file.size > 500000) {
+    } else if (file.size > 500000) {
       setErrorFileUpload('Fichier image trop volumineux (max 500 Ko)');
       setFormIsValid(false);
+    } else {
+      setFormIsValid(true);
     }
   };
 
   const handleSubmit = e => {
+    console.log(message, formIsValid);
     e.preventDefault();
-    if (formIsValid) {
+    if (message === undefined || message === null) {
+      setErrorMessage('Veuillez entrer un message');
+    } else if (formIsValid && message !== undefined) {
       sendPost(
         message,
         setMessage,
