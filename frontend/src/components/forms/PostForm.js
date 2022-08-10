@@ -2,8 +2,11 @@ import { useState, useContext } from 'react';
 import { UserContext } from '../../contexts/UserContext';
 import { sendPost } from '../../actions/sendPost';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faImage } from '@fortawesome/free-solid-svg-icons';
-import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import { faImage, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import {
+  validateMessageInput,
+  handleFileValidation,
+} from '../../services/FormValidation';
 
 /*
  * This component is the form that manages the sending of posts
@@ -20,48 +23,7 @@ export default function PostForm({ handleRefresh }) {
   const [errorMessage, setErrorMessage] = useState();
   const [errorFileUpload, setErrorFileUpload] = useState();
 
-  const handleMessageValidation = () => {
-    setErrorMessage();
-    if (message === undefined) {
-      setErrorMessage('Veuillez entrer un message');
-    } else if (message.length === 0) {
-      setErrorMessage('Veuillez entrer un message.');
-      setFormIsValid(false);
-    } else if (message.length < 11) {
-      setErrorMessage('Votre message est trop court (min. 10 caractères)');
-      setFormIsValid(false);
-    } else if (message.length > 500) {
-      setErrorMessage.message(
-        'Votre message est trop long (max. 500 caractères)'
-      );
-      setFormIsValid(false);
-    } else {
-      setFormIsValid(true);
-    }
-  };
-
-  const handleFileValidation = file => {
-    setErrorFileUpload();
-    if (
-      file.type !== 'image/jpeg' &&
-      file.type !== 'image/jpg' &&
-      file.type !== 'image/png' &&
-      file.type !== 'image/gif'
-    ) {
-      setErrorFileUpload(
-        'Type de fichier non pris en charge (uniquemment .jpeg, .jpg, .png et .gif).'
-      );
-      setFormIsValid(false);
-    } else if (file.size > 500000) {
-      setErrorFileUpload('Fichier image trop volumineux (max 500 Ko)');
-      setFormIsValid(false);
-    } else {
-      setFormIsValid(true);
-    }
-  };
-
   const handleSubmit = e => {
-    console.log(message, formIsValid);
     e.preventDefault();
     if (message === undefined || message === null) {
       setErrorMessage('Veuillez entrer un message');
@@ -78,6 +40,7 @@ export default function PostForm({ handleRefresh }) {
       setFileUpload(null);
     } else {
       console.log(errorMessage);
+      console.log(errorFileUpload);
     }
   };
 
@@ -89,7 +52,9 @@ export default function PostForm({ handleRefresh }) {
           id='message'
           name='message'
           onChange={e => setMessage(e.target.value)}
-          onBlur={() => handleMessageValidation()}
+          onBlur={() =>
+            validateMessageInput(message, setFormIsValid, setErrorMessage)
+          }
         />
         <div className='error-message'>{errorMessage}</div>
       </div>
@@ -107,7 +72,11 @@ export default function PostForm({ handleRefresh }) {
               accept='image/jpg, image/jpeg, image/png, image/gif'
               onChange={e => {
                 setFileUpload(e.target.files[0]);
-                handleFileValidation(e.target.files[0]);
+                handleFileValidation(
+                  e.target.files[0],
+                  setFormIsValid,
+                  setErrorFileUpload
+                );
               }}
             />
           </div>
