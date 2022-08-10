@@ -34,12 +34,10 @@ export const handleFileValidation = (
     file.type !== 'image/png' &&
     file.type !== 'image/gif'
   ) {
-    setErrorFileUpload(
-      'Type de fichier non pris en charge (uniquemment .jpeg, .jpg, .png et .gif).'
-    );
+    setErrorFileUpload('Fichier non accepté (seulement jpeg, png et gif).');
     setFormIsValid(false);
   } else if (file.size > 500000) {
-    setErrorFileUpload('Fichier image trop volumineux (max 500 Ko)');
+    setErrorFileUpload('Fichier trop volumineux (max 500 Ko)');
     setFormIsValid(false);
   } else {
     setFormIsValid(true);

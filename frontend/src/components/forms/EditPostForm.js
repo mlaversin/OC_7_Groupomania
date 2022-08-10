@@ -76,7 +76,6 @@ export default function EditPostForm({
               />
             </label>
           </div>
-          <div className='error-message'>{errorFileUpload}</div>
           {post.imageUrl && (
             <>
               <button
@@ -89,6 +88,7 @@ export default function EditPostForm({
             </>
           )}
         </div>
+        <div className='error-message'>{errorFileUpload}</div>
         <div className='edit-post-form-footer'>
           <button className='btn btn-black' onClick={() => setIsEditing(false)}>
             <FontAwesomeIcon icon={faArrowRotateLeft} className='btn-icon' />
