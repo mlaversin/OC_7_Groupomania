@@ -1,4 +1,5 @@
-import React from 'react';
+import { useState } from 'react';
+import { editPost } from '../../actions/editPost';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faArrowRotateLeft,
@@ -8,18 +9,26 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 /*
- * This component is the comment edit form which is displayed
+ * This component is the post edit form which is displayed
  * on PostCard component.
  */
 export default function EditPostForm({
   post,
   message,
   setMessage,
-  setFileUpload,
   setIsEditing,
-  setDeleteFile,
-  handleEdit,
+  handleRefresh,
 }) {
+  const [fileUpload, setFileUpload] = useState();
+  const [deleteFile, setDeleteFile] = useState(false);
+
+  const handleEdit = postId => {
+    editPost(postId, message, fileUpload, deleteFile, handleRefresh);
+    setIsEditing(false);
+    setDeleteFile(false);
+    setFileUpload(null);
+  };
+
   return (
     <>
       <div className='edit-post-form'>

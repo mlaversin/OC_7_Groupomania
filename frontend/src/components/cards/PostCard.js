@@ -1,11 +1,10 @@
 import { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../../contexts/UserContext';
-import { editPost } from '../../actions/editPost';
 import EditPostForm from '../forms/EditPostForm';
-import { deletePost } from '../../actions/deletePost';
-import LikeButton from '../buttons/LikeButton';
 import CommentCard from './CommentCard';
+import { deletePost } from '../../actions/deletePost';
 import CommentForm from '../forms/CommentForm';
+import LikeButton from '../buttons/LikeButton';
 import defaultProfilePic from '../../assets/default-profile-picture.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -29,8 +28,6 @@ export default function PostCard({ post, userId, handleRefresh }) {
   const [isEditing, setIsEditing] = useState(false);
 
   const [message, setMessage] = useState(post.message);
-  const [fileUpload, setFileUpload] = useState();
-  const [deleteFile, setDeleteFile] = useState(false);
 
   const [comments, setComments] = useState([]);
   const [showComments, setShowComments] = useState(false);
@@ -38,13 +35,6 @@ export default function PostCard({ post, userId, handleRefresh }) {
   useEffect(() => {
     setComments(post.comments);
   }, [post.comments]);
-
-  const handleEdit = postId => {
-    editPost(postId, message, fileUpload, deleteFile, handleRefresh);
-    setIsEditing(false);
-    setDeleteFile(false);
-    setFileUpload(null);
-  };
 
   const handleDelete = postId => {
     deletePost(postId, handleRefresh);
@@ -91,10 +81,8 @@ export default function PostCard({ post, userId, handleRefresh }) {
             post={post}
             message={message}
             setMessage={setMessage}
-            setFileUpload={setFileUpload}
             setIsEditing={setIsEditing}
-            setDeleteFile={setDeleteFile}
-            handleEdit={handleEdit}
+            handleRefresh={handleRefresh}
           />
         )}
       </div>
