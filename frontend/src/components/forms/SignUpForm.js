@@ -1,5 +1,4 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
@@ -7,9 +6,11 @@ import * as Yup from 'yup';
  * This component is the registration form which is displayed
  * on the authentication page
  */
-export default function SignUpForm() {
-  const navigate = useNavigate();
-
+export default function SignUpForm({
+  setRegister,
+  setSignUpForm,
+  setLoginForm,
+}) {
   const validationSchema = Yup.object().shape({
     firstname: Yup.string().required('Le prénom est obligatoire'),
     lastname: Yup.string().required('Le prénom est obligatoire'),
@@ -50,7 +51,9 @@ export default function SignUpForm() {
       .then(res => res.json())
       .then(res => {
         console.log(res.message);
-        navigate('/');
+        setRegister(true);
+        setSignUpForm(false);
+        setLoginForm(true);
       })
       .catch(err => console.log(err));
   };

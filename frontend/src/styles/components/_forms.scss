@@ -16,6 +16,26 @@ textarea {
   }
 }
 
+.success-message {
+  @include flex-row;
+  margin-bottom: 1rem;
+  padding-left: 1rem;
+  border-radius: 0.5rem;
+  background-color: #d4edda;
+  color: rgb(43, 92, 43);
+  text-align: center;
+
+  @include mq(mobilesm) {
+    width: 15rem;
+    padding: 0.4rem 0;
+  }
+
+  .btn {
+    margin: 0;
+    color: rgb(43, 92, 43);
+  }
+}
+
 /*******************************
   ********* POST FORM *********
  ******************************/

@@ -11,6 +11,7 @@ import logo from '../assets/logo-gpm.png';
 export default function Auth() {
   const [loginForm, setLoginForm] = useState(true);
   const [signUpForm, setSignUpForm] = useState(false);
+  const [register, setRegister] = useState(false);
 
   const handleForms = e => {
     if (e.target.id === 'signup') {
@@ -58,10 +59,24 @@ export default function Auth() {
             </nav>
           </div>
         </header>
+        {register && (
+          <div className='success-message'>
+            <p>Votre compte a été créé. Merci de vous connecter.</p>
+            <button className='btn' onClick={() => setRegister(false)}>
+              x
+            </button>
+          </div>
+        )}
         <div className='auth-modal'>
           <div className='auth-modal-container'>
             {loginForm && <LoginForm />}
-            {signUpForm && <SignUpForm />}
+            {signUpForm && (
+              <SignUpForm
+                setRegister={setRegister}
+                setSignUpForm={setSignUpForm}
+                setLoginForm={setLoginForm}
+              />
+            )}
           </div>
         </div>
       </main>
