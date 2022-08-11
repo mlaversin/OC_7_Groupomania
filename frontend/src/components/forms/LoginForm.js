@@ -64,7 +64,7 @@ export default function LoginForm() {
         validationSchema={validationSchema}
         onSubmit={values => handleSubmit(values)}
       >
-        <Form className='form login-form'>
+        <Form className='form login-form' noValidate>
           <label htmlFor='email'>Email</label>
           <Field type='email' id='email' name='email' />
           <div className='error-message'>

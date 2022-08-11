@@ -65,7 +65,7 @@ export default function SignUpForm({
         validationSchema={validationSchema}
         onSubmit={values => handleSubmit(values)}
       >
-        <Form className='form signup-form'>
+        <Form className='form signup-form' noValidate>
           <label htmlFor='firstname'>Prénom</label>
           <Field type='firstname' id='firstname' name='firstname' />
           <div className='error-message'>
