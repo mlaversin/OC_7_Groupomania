@@ -16,7 +16,20 @@ export default function SignUpForm() {
     email: Yup.string()
       .email('Email invalide')
       .required("L'email est obligatoire"),
-    password: Yup.string().required('Le mot de passe est obligatoire'),
+    password: Yup.string()
+      .required('Le mot de passe est obligatoire')
+      .matches(
+        /^(?=.*[a-z])/,
+        'Le mot de passe doit contenir au moins une minuscule.'
+      )
+      .matches(
+        /^(?=.*[A-Z])/,
+        'Le mot de passe doit contenir au moins une majuscule.'
+      )
+      .matches(
+        /^(?=.*[0-9])/,
+        'Le mot de passe doit contenir au moins un chiffre.'
+      ),
   });
 
   const initialValues = {
@@ -63,7 +76,7 @@ export default function SignUpForm() {
           </div>
 
           <label htmlFor='email'>Email</label>
-          <Field type='email' id='email' name='email' />
+          <Field type='email' id='email' name='email' noValidate />
           <div className='error-message'>
             <ErrorMessage name='email' />
           </div>
